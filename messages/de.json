@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "work": "Arbeit",
+    "about": "Über uns",
+    "contact": "Anfragen",
+    "inquire": "Anfragen"
+  },
+  "home": {
+    "cta": "Arbeit ansehen",
+    "ctaSecondary": "Anfragen",
+    "moments": "Momente",
+    "categories": "Was wir fotografieren",
+    "workPreview": "Einblicke in die Arbeit",
+    "viewAllWork": "Alle Arbeiten",
+    "aboutCta": "Mehr über uns",
+    "inquireHeadline": "Bereit für eure nächste Feier?",
+    "inquireSub": "Kleine Feste. Echte Momente. Wir sind da."
+  },
+  "work": {
+    "title": "Arbeit",
+    "all": "Alle",
+    "empty": "Noch keine Bilder in dieser Kategorie."
+  },
+  "about": {
+    "title": "Über uns",
+    "based": "Zuhause in",
+    "cta": "Anfrage senden",
+    "values": {
+      "v1": {
+        "label": "Nähe",
+        "text": "Wir bleiben nah am Moment — ungestellt, warm, auf Augenhöhe."
+      },
+      "v2": {
+        "label": "Licht",
+        "text": "Natürliches Licht, ruhige Komposition, Bilder die atmen."
+      },
+      "v3": {
+        "label": "Feier",
+        "text": "Von Gender Reveals bis Kinderfesten — die Feiern dazwischen."
+      }
+    }
+  },
+  "contact": {
+    "title": "Anfragen",
+    "subtitle": "Erzählt uns von eurer Feier.",
+    "intro": "Ob Paarshooting, Geburtstag oder Zusammenkunft — schreibt uns kurz, was ihr plant. Wir antworten persönlich.",
+    "name": "Name",
+    "email": "E-Mail",
+    "eventType": "Art der Feier",
+    "eventDate": "Datum",
+    "message": "Nachricht",
+    "messagePlaceholder": "Ort, Stimmung, was euch wichtig ist…",
+    "submit": "Nachricht senden",
+    "sending": "Wird gesendet…",
+    "success": "Danke — wir melden uns bald.",
+    "labelEmail": "E-Mail",
+    "labelLocation": "Standort",
+    "labelSocial": "Social",
+    "eventTypes": {
+      "couples": "Paarshooting",
+      "gender-reveal": "Gender Reveal",
+      "birthdays": "Geburtstag",
+      "kids": "Kinderfest",
+      "gatherings": "Zusammenkunft",
+      "other": "Anderes"
+    }
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "explore": "Entdecken",
+    "services": "Leistungen",
+    "connect": "Kontakt",
+    "cta": "Erzähl uns von eurer Feier",
+    "studio": "Studio"
+  }
+}

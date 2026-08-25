@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "contact": "Inquire",
+    "inquire": "Inquire"
+  },
+  "home": {
+    "cta": "View work",
+    "ctaSecondary": "Inquire",
+    "moments": "Moments",
+    "categories": "What we photograph",
+    "workPreview": "A taste of the work",
+    "viewAllWork": "View all work",
+    "aboutCta": "More about us",
+    "inquireHeadline": "Ready for your next celebration?",
+    "inquireSub": "Small gatherings. Real moments. We’re here."
+  },
+  "work": {
+    "title": "Work",
+    "all": "All",
+    "empty": "No images in this category yet."
+  },
+  "about": {
+    "title": "About",
+    "based": "Based in",
+    "cta": "Send an inquiry",
+    "values": {
+      "v1": {
+        "label": "Close",
+        "text": "We stay close to the moment — unposed, warm, eye-level."
+      },
+      "v2": {
+        "label": "Light",
+        "text": "Natural light, quiet composition, images that breathe."
+      },
+      "v3": {
+        "label": "Celebration",
+        "text": "From gender reveals to kids’ parties — the gatherings in between."
+      }
+    }
+  },
+  "contact": {
+    "title": "Inquire",
+    "subtitle": "Tell us about your celebration.",
+    "intro": "Whether a couple session, birthday, or gathering — send a short note about what you’re planning. We reply personally.",
+    "name": "Name",
+    "email": "Email",
+    "eventType": "Event type",
+    "eventDate": "Date",
+    "message": "Message",
+    "messagePlaceholder": "Place, mood, what matters to you…",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "success": "Thank you — we’ll be in touch soon.",
+    "labelEmail": "Email",
+    "labelLocation": "Location",
+    "labelSocial": "Social",
+    "eventTypes": {
+      "couples": "Couple session",
+      "gender-reveal": "Gender reveal",
+      "birthdays": "Birthday",
+      "kids": "Kids party",
+      "gatherings": "Gathering",
+      "other": "Other"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "explore": "Explore",
+    "services": "Services",
+    "connect": "Connect",
+    "cta": "Tell us about your celebration",
+    "studio": "Studio"
+  }
+}
