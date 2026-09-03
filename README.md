@@ -25,7 +25,7 @@ The public portfolio builds from in-code defaults (Unsplash placeholders). On Ve
 
 ## Replaceable brand name
 
-Open **Dashboard → Brand** and change **Studio name**. It flows through nav, hero, footer, metadata, and contact copy via `site_settings` / `BrandProvider`. Default placeholder is `Zweisam` — change anytime.
+Open **Dashboard → Brand** and change **Studio name**. It flows through nav, hero, footer, metadata, and contact copy via `site_settings` / `BrandProvider`. Default brand is **Klick Berlin**.
 
 ## Stack
 
@@ -43,4 +43,4 @@ Open **Dashboard → Brand** and change **Studio name**. It flows through nav, h
 
 ## Image credit
 
-Placeholder photos from [Unsplash](https://unsplash.com) for development only.
+Placeholder photos from [Unsplash](https://unsplash.com) for development only. Hero film: [Couple walking hand in hand](https://mixkit.co/free-stock-video/couple-walking-hand-in-hand-4661/) (Mixkit).

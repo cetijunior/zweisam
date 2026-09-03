@@ -2,7 +2,7 @@ import type { SiteData } from "./types";
 
 /** Default brand — fully replaceable from Dashboard → Brand */
 export const DEFAULT_SETTINGS = {
-  studioName: "Zweisam",
+  studioName: "Klick Berlin",
   taglineDe: "Die kleinen Feiern. Die großen Gefühle.",
   taglineEn: "Small gatherings. Big feelings.",
   aboutHeadlineDe: "Zwei Blicke. Eine Geschichte.",
@@ -11,10 +11,10 @@ export const DEFAULT_SETTINGS = {
     "Wir sind ein Paar hinter der Kamera — und fotografieren die Feiern dazwischen: Paarshootings, Gender Reveals, Geburtstage, Kinderfeste und Zusammenkünfte in Berlin. Drinnen und draußen. Nah, warm, echt.",
   aboutBodyEn:
     "We are a couple behind the camera — photographing the celebrations in between: couple sessions, gender reveals, birthdays, kids’ parties, and gatherings across Berlin. Indoors and outdoors. Close, warm, real.",
-  email: "hello@zweisam.studio",
-  instagram: "https://instagram.com/zweisam",
-  tiktok: "https://tiktok.com/@zweisam",
-  handle: "@zweisam",
+  email: "hello@klickberlin.de",
+  instagram: "https://instagram.com/klick_berlin",
+  tiktok: "",
+  handle: "@klick_berlin",
   location: "Berlin",
   photographersDe: "Ein Paar. Ein Studio.",
   photographersEn: "A couple. A studio.",

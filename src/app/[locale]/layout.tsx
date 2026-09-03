@@ -7,6 +7,8 @@ import { ScrollProgress } from "@/components/motion/primitives";
 import { routing } from "@/i18n/routing";
 import { readSiteData } from "@/lib/data/store";
 
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

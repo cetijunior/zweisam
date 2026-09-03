@@ -15,13 +15,12 @@ const DATA_PATH = path.join(process.cwd(), "data", "site-data.json");
 let memoryCache: SiteData | null = null;
 
 export async function readSiteData(): Promise<SiteData> {
-  if (memoryCache) return memoryCache;
-
   try {
     const raw = await fs.readFile(DATA_PATH, "utf8");
     memoryCache = JSON.parse(raw) as SiteData;
     return memoryCache;
   } catch {
+    if (memoryCache) return memoryCache;
     memoryCache = createDefaultData();
     await writeSiteData(memoryCache);
     return memoryCache;

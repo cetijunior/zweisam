@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -46,9 +47,18 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             <p className="text-xs uppercase tracking-[0.2em] text-ink/50">
               Dashboard
             </p>
-            <p className="font-[family-name:var(--font-syne)] text-xl font-bold">
-              {studioName}
-            </p>
+            <div className="mt-1 flex items-center gap-2.5">
+              <Image
+                src="/brand/klick-berlin.png"
+                alt=""
+                width={32}
+                height={32}
+                className="rounded-full bg-[#f3efe6]"
+              />
+              <p className="font-[family-name:var(--font-syne)] text-xl font-bold">
+                {studioName}
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-4 text-sm">
             <Link href="/de" className="text-ink/60 hover:text-ink">

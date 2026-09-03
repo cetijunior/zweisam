@@ -9,7 +9,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
-      storageKey="zweisam-theme"
+      storageKey="klick-berlin-theme"
     >
       {children}
     </NextThemesProvider>

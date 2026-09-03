@@ -8,7 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import { useBrand } from "@/components/brand/BrandProvider";
 import {
@@ -34,6 +34,7 @@ export function Hero({ cover }: { cover: MediaItem }) {
   const reduce = useReducedMotion();
   const mobile = useIsMobile();
   const ref = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -54,6 +55,14 @@ export function Hero({ cover }: { cover: MediaItem }) {
   const primary = (parts[0] ?? tagline).trim();
   const accent = (parts[1] ?? "").trim();
 
+  useEffect(() => {
+    if (reduce) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    void video.play().catch(() => undefined);
+  }, [reduce]);
+
   return (
     <section
       ref={ref}
@@ -63,14 +72,30 @@ export function Hero({ cover }: { cover: MediaItem }) {
         style={{ scale, y: imgY }}
         className="absolute inset-0 will-change-transform"
       >
-        <Image
-          src={cover.url}
-          alt={mediaAlt(cover, locale)}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
+        {reduce ? (
+          <Image
+            src="/brand/hero-poster.jpg"
+            alt={mediaAlt(cover, locale)}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        ) : (
+          <video
+            ref={videoRef}
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/brand/hero-poster.jpg"
+            aria-hidden
+          >
+            <source src="/brand/hero.mp4" type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-black/15" />
       </motion.div>
 

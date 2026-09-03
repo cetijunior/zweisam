@@ -23,7 +23,7 @@ const instrument = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Studio — Berlin Photography",
+    default: "Klick Berlin — Celebration Photography",
     template: "%s",
   },
   description:

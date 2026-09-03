@@ -12,7 +12,7 @@ create table if not exists public.profiles (
 
 create table if not exists public.site_settings (
   id int primary key default 1 check (id = 1),
-  studio_name text not null default 'Zweisam',
+  studio_name text not null default 'Klick Berlin',
   tagline_de text not null default '',
   tagline_en text not null default '',
   about_headline_de text not null default '',

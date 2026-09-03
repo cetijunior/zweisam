@@ -11,6 +11,7 @@ import {
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { useBrand } from "@/components/brand/BrandProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { getTagline, categoryName } from "@/lib/data/selectors";
@@ -135,7 +136,10 @@ export function SiteHeader() {
             }}
             className="relative z-[70] font-[family-name:var(--font-syne)] text-[0.95rem] font-medium tracking-[0.04em] transition-[color,text-shadow] duration-300 md:text-base"
           >
-            {brand.studioName}
+            <BrandMark
+              size={34}
+              nameClassName="tracking-[0.04em]"
+            />
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex">
@@ -305,9 +309,10 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
       <div className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
-            <p className="font-[family-name:var(--font-syne)] text-3xl font-medium tracking-tight md:text-4xl">
-              {brand.studioName}
-            </p>
+            <BrandMark
+              size={56}
+              nameClassName="font-[family-name:var(--font-syne)] text-3xl font-medium tracking-tight md:text-4xl"
+            />
             <p className="mt-4 max-w-sm font-[family-name:var(--font-instrument)] text-lg italic leading-snug text-muted md:text-xl">
               {tagline}
             </p>
@@ -373,19 +378,21 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Instagram
+                    {brand.handle}
                   </a>
                 </li>
-                <li>
-                  <a
-                    href={brand.tiktok}
-                    className="text-ink/80 hover:text-ink"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    TikTok
-                  </a>
-                </li>
+                {brand.tiktok ? (
+                  <li>
+                    <a
+                      href={brand.tiktok}
+                      className="text-ink/80 hover:text-ink"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      TikTok
+                    </a>
+                  </li>
+                ) : null}
                 <li>
                   <a
                     href={`mailto:${brand.email}`}
