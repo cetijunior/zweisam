@@ -416,6 +416,17 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
           <p>
             {t("studio")} · {brand.location}
           </p>
+          <p>
+            {t("madeBy")}{" "}
+            <a
+              href="https://rritjesade.com"
+              className="text-ink/70 underline decoration-line underline-offset-2 transition-colors hover:text-ink"
+              target="_blank"
+              rel="noreferrer"
+            >
+              rritjesade.com
+            </a>
+          </p>
         </div>
       </div>
     </footer>
