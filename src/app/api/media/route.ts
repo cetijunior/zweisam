@@ -1,22 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { isAuthorized } from "@/lib/auth";
 import {
   deleteMedia,
   readSiteData,
+  saveUpload,
   upsertMedia,
   upsertProject,
 } from "@/lib/data/store";
 import type { MediaItem, Project } from "@/lib/data/types";
 
-function authorized(req: NextRequest) {
-  const token = req.cookies.get("studio_auth")?.value;
-  const expected = process.env.DASHBOARD_PASSWORD ?? "studio";
-  return token === expected;
-}
+const MAX_UPLOAD_BYTES = 15 * 1024 * 1024;
+const IMAGE_TYPES: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/avif": "avif",
+};
 
 export async function GET(req: NextRequest) {
-  if (!authorized(req)) {
+  if (!(await isAuthorized(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const data = await readSiteData();
@@ -28,7 +30,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  if (!authorized(req)) {
+  if (!(await isAuthorized(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -43,6 +45,16 @@ export async function POST(req: NextRequest) {
 
     if (!file) {
       return NextResponse.json({ error: "No file" }, { status: 400 });
+    }
+    const ext = IMAGE_TYPES[file.type];
+    if (!ext) {
+      return NextResponse.json(
+        { error: "Only JPEG, PNG, WebP or AVIF images are allowed" },
+        { status: 415 },
+      );
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      return NextResponse.json({ error: "Image is larger than 15 MB" }, { status: 413 });
     }
 
     const data = await readSiteData();
@@ -63,19 +75,16 @@ export async function POST(req: NextRequest) {
     }
 
     const bytes = Buffer.from(await file.arrayBuffer());
-    const ext = file.name.split(".").pop() || "jpg";
     const id = `media-${crypto.randomUUID()}`;
     const filename = `${id}.${ext}`;
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-
+    let url: string;
     try {
-      await fs.mkdir(uploadDir, { recursive: true });
-      await fs.writeFile(path.join(uploadDir, filename), bytes);
+      url = await saveUpload(filename, bytes, file.type);
     } catch {
       return NextResponse.json(
         {
           error:
-            "File uploads need a writable disk or Supabase Storage. Local uploads work in development; connect Storage before uploading in production.",
+            "Upload failed. On Vercel, set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY and run the Supabase migrations.",
         },
         { status: 503 },
       );
@@ -84,7 +93,7 @@ export async function POST(req: NextRequest) {
     const item: MediaItem = {
       id,
       projectId: project.id,
-      url: `/uploads/${filename}`,
+      url,
       width: 1600,
       height: 1200,
       altDe,
@@ -116,7 +125,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  if (!authorized(req)) {
+  if (!(await isAuthorized(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const { searchParams } = new URL(req.url);

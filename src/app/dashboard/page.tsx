@@ -19,6 +19,8 @@ export default function DashboardLibraryPage() {
   }
 
   useEffect(() => {
+    // Initial fetch; state updates land asynchronously after the response.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 

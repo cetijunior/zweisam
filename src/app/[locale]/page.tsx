@@ -13,7 +13,12 @@ import {
   getHeroImage,
   getPhotographersLine,
   getPublishedProjects,
+  getTagline,
+  mediaAlt,
 } from "@/lib/data/selectors";
+import type { AppLocale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/site";
+import { StudioJsonLd } from "@/components/seo/StudioJsonLd";
 import { readSiteData } from "@/lib/data/store";
 
 export async function generateMetadata({
@@ -24,12 +29,16 @@ export async function generateMetadata({
   const { locale } = await params;
   const data = await readSiteData();
   const { settings } = data;
-  const tagline =
-    locale === "de" ? settings.taglineDe : settings.taglineEn;
-  return {
+  const loc = locale as AppLocale;
+  const hero = getHeroImage(data);
+  return pageMetadata({
+    locale: loc,
+    path: "",
     title: `${settings.studioName} — ${settings.location}`,
-    description: tagline,
-  };
+    description: getTagline(settings, loc),
+    settings,
+    image: { url: hero.url, alt: mediaAlt(hero, loc) },
+  });
 }
 
 export default async function HomePage({
@@ -52,6 +61,7 @@ export default async function HomePage({
 
   return (
     <>
+      <StudioJsonLd settings={data.settings} locale={loc} image={hero.url} />
       <Hero cover={hero} />
       <WorkFragments data={data} />
       <CategoryChapters data={data} categories={data.categories} />

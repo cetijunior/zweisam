@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { AppLocale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/site";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { readSiteData } from "@/lib/data/store";
 
@@ -10,9 +12,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const data = await readSiteData();
-  return {
-    title: `${locale === "de" ? "Anfragen" : "Inquire"} — ${data.settings.studioName}`,
-  };
+  const loc = locale as AppLocale;
+  const t = await getTranslations({ locale: loc, namespace: "contact" });
+  return pageMetadata({
+    locale: loc,
+    path: "/contact",
+    title: `${loc === "de" ? "Anfragen" : "Inquire"} — ${data.settings.studioName}`,
+    description: t("intro"),
+    settings: data.settings,
+  });
 }
 
 export default async function ContactPage({

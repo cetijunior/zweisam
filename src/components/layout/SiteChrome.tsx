@@ -14,6 +14,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useBrand } from "@/components/brand/BrandProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { useMounted } from "@/lib/useMounted";
 import { getTagline, categoryName } from "@/lib/data/selectors";
 import type { Category } from "@/lib/data/types";
 
@@ -35,12 +36,8 @@ export function SiteHeader() {
   const { resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const { scrollY } = useScroll();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Prefer live CSS vars so toggle + hydration never desync nav contrast from the theme.
   const paperRgb =
@@ -65,7 +62,9 @@ export function SiteHeader() {
   });
 
   useEffect(() => {
-    setScrolled(scrollY.get() > 36);
+    // Sync once for restored scroll positions (e.g. reload mid-page).
+    const frame = requestAnimationFrame(() => setScrolled(scrollY.get() > 36));
+    return () => cancelAnimationFrame(frame);
   }, [scrollY]);
 
   const links = useMemo(
@@ -81,9 +80,11 @@ export function SiteHeader() {
   const otherLocale = locale === "de" ? "en" : "de";
   const overHero = pathname === "/" && !scrolled && !open;
 
-  useEffect(() => {
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -103,6 +104,12 @@ export function SiteHeader() {
 
   return (
     <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-paper focus:px-4 focus:py-2 focus:text-ink focus:outline focus:outline-1"
+      >
+        {t("skip")}
+      </a>
       <motion.header
         key={themeKey}
         style={
@@ -151,6 +158,7 @@ export function SiteHeader() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    aria-current={active ? "page" : undefined}
                     style={active ? chromeStyle : mutedStyle}
                     className="text-[0.7rem] uppercase tracking-[0.18em] transition-[color,text-shadow] duration-300 hover:opacity-100"
                   >
@@ -187,12 +195,11 @@ export function SiteHeader() {
 
             <button
               type="button"
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? t("closeMenu") : t("openMenu")}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
               className="relative z-[70] flex h-11 w-11 items-center justify-center md:hidden"
             >
-              <span className="sr-only">{open ? "Close" : "Menu"}</span>
               {open ? (
                 <span
                   aria-hidden

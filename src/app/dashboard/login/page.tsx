@@ -20,7 +20,7 @@ export default function DashboardLoginPage() {
     });
     setPending(false);
     if (!res.ok) {
-      setError("Wrong password");
+      setError(res.status === 503 ? "Dashboard password is not configured" : "Wrong password");
       return;
     }
     router.push("/dashboard");
@@ -36,14 +36,18 @@ export default function DashboardLoginPage() {
         <h1 className="font-[family-name:var(--font-syne)] text-2xl font-bold">
           Studio login
         </h1>
-        <p className="mt-2 text-sm text-ink/55">
-          Default password: <code className="text-ink">studio</code>
-        </p>
+        {process.env.NODE_ENV !== "production" ? (
+          <p className="mt-2 text-sm text-ink/55">
+            Dev password: <code className="text-ink">studio</code>
+          </p>
+        ) : null}
         <input
           name="password"
           type="password"
           required
           placeholder="Password"
+          aria-label="Password"
+          autoComplete="current-password"
           className="mt-6 w-full border-b border-black/20 bg-transparent py-3 outline-none"
         />
         {error ? <p className="mt-3 text-sm text-red-700">{error}</p> : null}

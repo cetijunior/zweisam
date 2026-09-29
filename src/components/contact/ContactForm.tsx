@@ -41,12 +41,14 @@ export function ContactForm({
   const locale = useLocale() as "de" | "en";
   const [done, setDone] = useState(false);
   const [pending, setPending] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setPending(true);
+    setFailed(false);
     const form = new FormData(e.currentTarget);
-    await fetch("/api/inquiries", {
+    const res = await fetch("/api/inquiries", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -55,11 +57,13 @@ export function ContactForm({
         eventType: form.get("eventType"),
         eventDate: form.get("eventDate"),
         message: form.get("message"),
+        company: form.get("company"),
         locale,
       }),
-    });
+    }).catch(() => null);
     setPending(false);
-    setDone(true);
+    if (res?.ok) setDone(true);
+    else setFailed(true);
   }
 
   return (
@@ -115,7 +119,10 @@ export function ContactForm({
         <div className="md:col-span-6 md:col-start-7">
           {done ? (
             <Reveal>
-              <div className="border border-line bg-paper-elevated px-8 py-14">
+              <div
+                role="status"
+                className="border border-line bg-paper-elevated px-8 py-14"
+              >
                 <p className="font-[family-name:var(--font-instrument)] text-3xl italic text-ink">
                   {t("success")}
                 </p>
@@ -131,18 +138,28 @@ export function ContactForm({
             <Reveal delay={0.08}>
               <form
                 onSubmit={onSubmit}
-                className="space-y-8 border border-line bg-paper-elevated px-6 py-10 md:px-10 md:py-12"
+                className="relative space-y-8 border border-line bg-paper-elevated px-6 py-10 md:px-10 md:py-12"
               >
                 <div className="grid gap-8 sm:grid-cols-2">
-                  <Field label={t("name")} name="name" required />
-                  <Field label={t("email")} name="email" type="email" required />
+                  <Field label={t("name")} name="name" autoComplete="name" required />
+                  <Field
+                    label={t("email")}
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                  />
                 </div>
                 <div className="grid gap-8 sm:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+                    <label
+                      htmlFor="field-eventType"
+                      className="mb-2 block text-[0.65rem] uppercase tracking-[0.2em] text-muted"
+                    >
                       {t("eventType")}
                     </label>
                     <select
+                      id="field-eventType"
                       name="eventType"
                       required
                       className="w-full border-b border-line bg-transparent py-3 text-ink outline-none transition-colors focus:border-ink"
@@ -157,20 +174,40 @@ export function ContactForm({
                   <Field label={t("eventDate")} name="eventDate" type="date" />
                 </div>
                 <div>
-                  <label className="mb-2 block text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+                  <label
+                    htmlFor="field-message"
+                    className="mb-2 block text-[0.65rem] uppercase tracking-[0.2em] text-muted"
+                  >
                     {t("message")}
                   </label>
                   <textarea
+                    id="field-message"
                     name="message"
+                    maxLength={5000}
                     required
                     rows={6}
                     placeholder={t("messagePlaceholder")}
                     className="w-full resize-none border-b border-line bg-transparent py-3 text-ink outline-none transition-colors placeholder:text-muted/60 focus:border-ink"
                   />
                 </div>
+                {/* Honeypot for bots; hidden from people and assistive tech */}
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                  className="absolute -left-[9999px] h-px w-px opacity-0"
+                />
+                {failed ? (
+                  <p role="alert" className="text-sm text-accent">
+                    {t("error")}
+                  </p>
+                ) : null}
                 <button
                   type="submit"
                   disabled={pending}
+                  aria-busy={pending}
                   className="btn-line mt-2 disabled:opacity-50"
                 >
                   {pending ? t("sending") : t("submit")}
@@ -305,20 +342,28 @@ function Field({
   label,
   name,
   type = "text",
+  autoComplete,
   required,
 }: {
   label: string;
   name: string;
   type?: string;
+  autoComplete?: string;
   required?: boolean;
 }) {
+  const id = `field-${name}`;
   return (
     <div>
-      <label className="mb-2 block text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+      <label
+        htmlFor={id}
+        className="mb-2 block text-[0.65rem] uppercase tracking-[0.2em] text-muted"
+      >
         {label}
       </label>
       <input
+        id={id}
         name={name}
+        autoComplete={autoComplete}
         type={type}
         required={required}
         className="w-full border-b border-line bg-transparent py-3 text-ink outline-none transition-colors focus:border-ink"

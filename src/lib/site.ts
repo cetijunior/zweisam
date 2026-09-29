@@ -1,0 +1,51 @@
+import type { Metadata } from "next";
+import { routing, type AppLocale } from "@/i18n/routing";
+import type { SiteSettings } from "@/lib/data/types";
+
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000")
+).replace(/\/$/, "");
+
+export const PUBLIC_PATHS = ["", "/work", "/about", "/contact"] as const;
+
+/** Canonical + hreflang alternates + OpenGraph for one localized public page. */
+export function pageMetadata({
+  locale,
+  path,
+  title,
+  description,
+  settings,
+  image,
+}: {
+  locale: AppLocale;
+  path: (typeof PUBLIC_PATHS)[number];
+  title: string;
+  description: string;
+  settings: SiteSettings;
+  image?: { url: string; alt: string };
+}): Metadata {
+  const languages = Object.fromEntries(
+    routing.locales.map((l) => [l, `/${l}${path}`]),
+  );
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}${path}`,
+      languages: { ...languages, "x-default": `/${routing.defaultLocale}${path}` },
+    },
+    openGraph: {
+      type: "website",
+      siteName: settings.studioName,
+      title,
+      description,
+      url: `/${locale}${path}`,
+      locale: locale === "de" ? "de_DE" : "en_US",
+      images: image ? [{ url: image.url, alt: image.alt }] : undefined,
+    },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}

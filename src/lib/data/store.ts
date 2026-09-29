@@ -11,10 +11,81 @@ import type {
 
 const DATA_PATH = path.join(process.cwd(), "data", "site-data.json");
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const DOC_ID = "main";
+export const STORAGE_BUCKET = "portfolio";
+
+/** Supabase persists edits across deploys and instances; without it we use the local JSON file. */
+export const usingSupabase = Boolean(SUPABASE_URL && SUPABASE_KEY);
+
+function supabaseHeaders(extra: Record<string, string> = {}) {
+  return {
+    apikey: SUPABASE_KEY!,
+    Authorization: `Bearer ${SUPABASE_KEY}`,
+    ...extra,
+  };
+}
+
+async function readFromSupabase(): Promise<SiteData> {
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/site_document?id=eq.${DOC_ID}&select=data`,
+    { headers: supabaseHeaders(), cache: "no-store" },
+  );
+  if (!res.ok) throw new Error(`Supabase read failed: ${res.status}`);
+  const rows = (await res.json()) as { data: SiteData }[];
+  if (rows[0]) return rows[0].data;
+  const seeded = createDefaultData();
+  await writeToSupabase(seeded);
+  return seeded;
+}
+
+async function writeToSupabase(data: SiteData): Promise<void> {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/site_document`, {
+    method: "POST",
+    headers: supabaseHeaders({
+      "Content-Type": "application/json",
+      Prefer: "resolution=merge-duplicates,return=minimal",
+    }),
+    body: JSON.stringify({
+      id: DOC_ID,
+      data,
+      updated_at: new Date().toISOString(),
+    }),
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`Supabase write failed: ${res.status}`);
+}
+
+/** Stores an upload in the public bucket (Supabase) or public/uploads (local); returns its URL. */
+export async function saveUpload(
+  filename: string,
+  bytes: Buffer,
+  contentType: string,
+): Promise<string> {
+  if (usingSupabase) {
+    const res = await fetch(
+      `${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${filename}`,
+      {
+        method: "POST",
+        headers: supabaseHeaders({ "Content-Type": contentType }),
+        body: new Uint8Array(bytes),
+      },
+    );
+    if (!res.ok) throw new Error(`Supabase upload failed: ${res.status}`);
+    return `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filename}`;
+  }
+  const uploadDir = path.join(process.cwd(), "public", "uploads");
+  await fs.mkdir(uploadDir, { recursive: true });
+  await fs.writeFile(path.join(uploadDir, filename), bytes);
+  return `/uploads/${filename}`;
+}
+
 /** In-memory fallback — Vercel’s filesystem is read-only at runtime */
 let memoryCache: SiteData | null = null;
 
 export async function readSiteData(): Promise<SiteData> {
+  if (usingSupabase) return readFromSupabase();
   try {
     const raw = await fs.readFile(DATA_PATH, "utf8");
     memoryCache = JSON.parse(raw) as SiteData;
@@ -28,6 +99,7 @@ export async function readSiteData(): Promise<SiteData> {
 }
 
 export async function writeSiteData(data: SiteData): Promise<void> {
+  if (usingSupabase) return writeToSupabase(data);
   memoryCache = data;
   try {
     await fs.mkdir(path.dirname(DATA_PATH), { recursive: true });

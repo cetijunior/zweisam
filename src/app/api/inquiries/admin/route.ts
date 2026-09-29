@@ -1,14 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isAuthorized } from "@/lib/auth";
 import { readSiteData, updateInquiryStatus } from "@/lib/data/store";
 
-function authorized(req: NextRequest) {
-  const token = req.cookies.get("studio_auth")?.value;
-  const expected = process.env.DASHBOARD_PASSWORD ?? "studio";
-  return token === expected;
-}
-
 export async function GET(req: NextRequest) {
-  if (!authorized(req)) {
+  if (!(await isAuthorized(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const data = await readSiteData();
@@ -16,7 +11,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
-  if (!authorized(req)) {
+  if (!(await isAuthorized(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const body = await req.json();

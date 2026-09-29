@@ -3,7 +3,10 @@
     "work": "Work",
     "about": "About",
     "contact": "Inquire",
-    "inquire": "Inquire"
+    "inquire": "Inquire",
+    "skip": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "home": {
     "cta": "View work",
@@ -63,7 +66,8 @@
       "kids": "Kids party",
       "gatherings": "Gathering",
       "other": "Other"
-    }
+    },
+    "error": "Something went wrong. Please try again or email us directly."
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -73,5 +77,10 @@
     "cta": "Tell us about your celebration",
     "studio": "Studio",
     "madeBy": "Made by"
+  },
+  "notFound": {
+    "title": "This page doesn't exist.",
+    "body": "It may have moved. Have a look at our work instead.",
+    "cta": "Back to home"
   }
 }

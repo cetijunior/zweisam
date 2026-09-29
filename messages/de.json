@@ -3,7 +3,10 @@
     "work": "Arbeit",
     "about": "Über uns",
     "contact": "Anfragen",
-    "inquire": "Anfragen"
+    "inquire": "Anfragen",
+    "skip": "Zum Inhalt springen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
   },
   "home": {
     "cta": "Arbeit ansehen",
@@ -63,7 +66,8 @@
       "kids": "Kinderfest",
       "gatherings": "Zusammenkunft",
       "other": "Anderes"
-    }
+    },
+    "error": "Das hat leider nicht geklappt. Bitte versuch es noch einmal oder schreib uns direkt eine E-Mail."
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten.",
@@ -73,5 +77,10 @@
     "cta": "Erzähl uns von eurer Feier",
     "studio": "Studio",
     "madeBy": "Made by"
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht.",
+    "body": "Vielleicht wurde sie verschoben. Schau dir stattdessen unsere Arbeiten an.",
+    "cta": "Zur Startseite"
   }
 }

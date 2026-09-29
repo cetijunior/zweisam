@@ -31,7 +31,9 @@ export default async function LocaleLayout({
       <BrandProvider settings={data.settings}>
         <ScrollProgress />
         <SiteHeader />
-        <main className="min-h-screen">{children}</main>
+        <main id="main" tabIndex={-1} className="min-h-screen outline-none">
+          {children}
+        </main>
         <SiteFooter categories={data.categories} />
       </BrandProvider>
     </NextIntlClientProvider>

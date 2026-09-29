@@ -5,7 +5,10 @@ import {
   getAboutBody,
   getAboutHeadline,
   getPhotographersLine,
+  mediaAlt,
 } from "@/lib/data/selectors";
+import type { AppLocale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/site";
 import { readSiteData } from "@/lib/data/store";
 
 export async function generateMetadata({
@@ -15,9 +18,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const data = await readSiteData();
-  return {
-    title: `${locale === "de" ? "Über uns" : "About"} — ${data.settings.studioName}`,
-  };
+  const loc = locale as AppLocale;
+  const portrait = data.media.find((m) => m.id === "media-10") ?? data.media[0];
+  return pageMetadata({
+    locale: loc,
+    path: "/about",
+    title: `${loc === "de" ? "Über uns" : "About"} — ${data.settings.studioName}`,
+    description: getAboutHeadline(data.settings, loc),
+    settings: data.settings,
+    image: portrait ? { url: portrait.url, alt: mediaAlt(portrait, loc) } : undefined,
+  });
 }
 
 export default async function AboutPage({
