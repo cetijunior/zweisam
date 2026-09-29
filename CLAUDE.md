@@ -1,4 +1,4 @@
-# Klick Berlin (folder: `zweisam`) — project schematic
+# Klick Berlin — project schematic
 
 > Bilingual (DE/EN) site for a Berlin couple-photography studio covering intimate
 > celebrations (couples, gender reveals, birthdays, kids parties), with cinematic
@@ -56,3 +56,8 @@ npm run build && npm run lint
 
 - Persistence: `store.ts` uses Supabase when `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` are set (whole `SiteData` in `site_document`, uploads in the public `portfolio` bucket, see `003_site_document.sql`), else the local JSON file. **Until those env vars are set on Vercel, dashboard edits and inquiries don't persist.** The relational tables in `001_initial.sql` are unused for now.
 - Replace the placeholder imagery with the studio's own.
+
+## 7. Hosting
+
+- Vercel project `klickberlin` (zweisam-dusky.vercel.app) is the only deployment; the duplicate `zweisam-web` was deleted on 2026-09-29.
+- GitHub repo is still `cetijunior/zweisam`.
