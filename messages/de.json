@@ -89,7 +89,20 @@
     "consentLink": "Datenschutzerklärung",
     "labelWhatsapp": "WhatsApp",
     "labelPhone": "Telefon",
-    "response": "Wir antworten meist innerhalb von 24 Stunden."
+    "response": "Wir antworten meist innerhalb von 24 Stunden.",
+    "preferred": "schnellste Antwort",
+    "sendWhatsapp": "Per WhatsApp senden",
+    "sendEmail": "Per E-Mail senden",
+    "chatWhatsapp": "Auf WhatsApp schreiben",
+    "openedWhatsapp": "WhatsApp ist geöffnet — einfach auf Senden tippen.",
+    "openedEmail": "Dein E-Mail-Programm ist geöffnet — einfach auf Senden klicken.",
+    "notOpened": "Nichts geöffnet? Schreib uns direkt:",
+    "back": "Zurück zum Formular",
+    "compose": {
+      "greeting": "Hallo {studio}! Neue Anfrage über die Website:",
+      "subject": "Anfrage: {event}",
+      "quick": "Hallo {studio}! Ich hätte gern Infos zu einem Shooting."
+    }
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten.",

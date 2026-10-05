@@ -12,6 +12,7 @@ import {
 import { useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import { useBrand } from "@/components/brand/BrandProvider";
+import { formatPhone, mailtoUrl, whatsappUrl } from "@/lib/contact";
 import {
   DrawLine,
   ImageReveal,
@@ -41,32 +42,57 @@ export function ContactForm({
   const t = useTranslations("contact");
   const brand = useBrand();
   const locale = useLocale() as "de" | "en";
-  const [done, setDone] = useState(false);
-  const [pending, setPending] = useState(false);
-  const [failed, setFailed] = useState(false);
+  const [sentVia, setSentVia] = useState<"whatsapp" | "email" | null>(null);
+  const hasWhatsapp = Boolean(brand.whatsapp);
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  /** Opens WhatsApp (primary) or the email app with the inquiry pre-written. */
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setPending(true);
-    setFailed(false);
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
+    const via = hasWhatsapp && submitter?.value !== "email" ? "whatsapp" : "email";
     const form = new FormData(e.currentTarget);
-    const res = await fetch("/api/inquiries", {
+    if (form.get("company")) return; // honeypot
+
+    const eventKey = String(form.get("eventType") ?? "other");
+    const eventLabel = t(`eventTypes.${eventKey}` as "eventTypes.other");
+    const date = String(form.get("eventDate") ?? "");
+    const lines = [
+      t("compose.greeting", { studio: brand.studioName }),
+      "",
+      `${t("name")}: ${form.get("name")}`,
+      form.get("email") ? `${t("email")}: ${form.get("email")}` : null,
+      `${t("eventType")}: ${eventLabel}`,
+      date ? `${t("eventDate")}: ${date}` : null,
+      "",
+      String(form.get("message") ?? ""),
+    ].filter((l) => l !== null);
+    const text = lines.join("\n").trim();
+
+    if (via === "whatsapp") {
+      window.open(whatsappUrl(brand.whatsapp, text), "_blank", "noopener");
+    } else {
+      window.location.href = mailtoUrl(
+        brand.email,
+        t("compose.subject", { event: eventLabel }),
+        text,
+      );
+    }
+    setSentVia(via);
+
+    // Keep a copy in the dashboard too (best effort; needs a valid email).
+    void fetch("/api/inquiries", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: form.get("name"),
         email: form.get("email"),
-        eventType: form.get("eventType"),
-        eventDate: form.get("eventDate"),
+        eventType: eventKey,
+        eventDate: date,
         message: form.get("message"),
-        company: form.get("company"),
         consent: form.get("consent") === "on",
         locale,
       }),
-    }).catch(() => null);
-    setPending(false);
-    if (res?.ok) setDone(true);
-    else setFailed(true);
+    }).catch(() => undefined);
   }
 
   return (
@@ -97,15 +123,23 @@ export function ContactForm({
           </Reveal>
 
           <Reveal delay={0.1} className="mt-12 space-y-6 border-t border-line pt-10">
-            <InfoRow label={t("labelEmail")} value={brand.email} href={`mailto:${brand.email}`} />
-            {brand.whatsapp ? (
-              <InfoRow
-                label={t("labelWhatsapp")}
-                value={`+${brand.whatsapp}`}
-                href={`https://wa.me/${brand.whatsapp}`}
-                external
-              />
+            {hasWhatsapp ? (
+              <div>
+                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+                  {t("labelWhatsapp")} · {t("preferred")}
+                </p>
+                <a
+                  href={whatsappUrl(brand.whatsapp, t("compose.quick", { studio: brand.studioName }))}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-5 py-3 text-sm font-medium text-white transition hover:brightness-105"
+                >
+                  <WhatsappIcon />
+                  {formatPhone(brand.whatsapp)}
+                </a>
+              </div>
             ) : null}
+            <InfoRow label={t("labelEmail")} value={brand.email} href={`mailto:${brand.email}`} />
             {brand.phone ? (
               <InfoRow
                 label={t("labelPhone")}
@@ -142,21 +176,38 @@ export function ContactForm({
 
         {/* Form */}
         <div className="md:col-span-6 md:col-start-7">
-          {done ? (
+          {sentVia ? (
             <Reveal>
               <div
                 role="status"
                 className="border border-line bg-paper-elevated px-8 py-14"
               >
                 <p className="font-[family-name:var(--font-instrument)] text-3xl italic text-ink">
-                  {t("success")}
+                  {sentVia === "whatsapp" ? t("openedWhatsapp") : t("openedEmail")}
                 </p>
-                <a
-                  href={`mailto:${brand.email}`}
-                  className="btn-ghost mt-8 text-ink"
+                <p className="mt-4 text-sm text-ink-soft">{t("notOpened")}</p>
+                <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2">
+                  {hasWhatsapp ? (
+                    <a
+                      href={whatsappUrl(brand.whatsapp)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-ghost text-ink"
+                    >
+                      WhatsApp {formatPhone(brand.whatsapp)}
+                    </a>
+                  ) : null}
+                  <a href={`mailto:${brand.email}`} className="btn-ghost text-ink">
+                    {brand.email}
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSentVia(null)}
+                  className="mt-8 text-xs uppercase tracking-[0.18em] text-muted hover:text-ink"
                 >
-                  {brand.email}
-                </a>
+                  ← {t("back")}
+                </button>
               </div>
             </Reveal>
           ) : (
@@ -172,7 +223,7 @@ export function ContactForm({
                     name="email"
                     type="email"
                     autoComplete="email"
-                    required
+                    required={!hasWhatsapp}
                   />
                 </div>
                 <div className="grid gap-8 sm:grid-cols-2">
@@ -249,19 +300,25 @@ export function ContactForm({
                     .
                   </span>
                 </label>
-                {failed ? (
-                  <p role="alert" className="text-sm text-accent">
-                    {t("error")}
-                  </p>
-                ) : null}
-                <button
-                  type="submit"
-                  disabled={pending}
-                  aria-busy={pending}
-                  className="btn-line mt-2 disabled:opacity-50"
-                >
-                  {pending ? t("sending") : t("submit")}
-                </button>
+                <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:gap-8">
+                  {hasWhatsapp ? (
+                    <button
+                      type="submit"
+                      value="whatsapp"
+                      className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-6 text-sm font-medium text-white transition hover:brightness-105"
+                    >
+                      <WhatsappIcon />
+                      {t("sendWhatsapp")}
+                    </button>
+                  ) : null}
+                  <button
+                    type="submit"
+                    value="email"
+                    className={hasWhatsapp ? "btn-ghost self-center text-ink sm:self-auto" : "btn-line"}
+                  >
+                    {t("sendEmail")}
+                  </button>
+                </div>
               </form>
             </Reveal>
           )}
@@ -336,6 +393,17 @@ export function InquireTeaser({
             {t("inquireSub")}
           </p>
           <div className="mt-8 flex w-full flex-col gap-4 sm:mt-12 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
+            {brand.whatsapp ? (
+              <a
+                href={whatsappUrl(brand.whatsapp, tc("compose.quick", { studio: brand.studioName }))}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-6 text-sm font-medium text-white transition hover:brightness-105 sm:w-auto"
+              >
+                <WhatsappIcon />
+                {tc("chatWhatsapp")}
+              </a>
+            ) : null}
             <Link
               href="/contact"
               className="btn-line btn-line-light w-full justify-center sm:w-auto"
@@ -352,6 +420,14 @@ export function InquireTeaser({
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function WhatsappIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z" />
+    </svg>
   );
 }
 

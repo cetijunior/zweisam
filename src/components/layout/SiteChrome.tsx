@@ -16,6 +16,7 @@ import { useBrand } from "@/components/brand/BrandProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useMounted } from "@/lib/useMounted";
 import { getTagline, categoryName } from "@/lib/data/selectors";
+import { formatPhone } from "@/lib/contact";
 import type { Category } from "@/lib/data/types";
 
 const PAPER_RGB = {
@@ -378,6 +379,18 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
                 {t("connect")}
               </p>
               <ul className="space-y-3.5 text-sm">
+                {brand.whatsapp ? (
+                  <li>
+                    <a
+                      href={`https://wa.me/${brand.whatsapp}`}
+                      className="text-ink/80 hover:text-ink"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      WhatsApp · {formatPhone(brand.whatsapp)}
+                    </a>
+                  </li>
+                ) : null}
                 <li>
                   <a
                     href={brand.instagram}
@@ -388,18 +401,6 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
                     {brand.handle}
                   </a>
                 </li>
-                {brand.whatsapp ? (
-                  <li>
-                    <a
-                      href={`https://wa.me/${brand.whatsapp}`}
-                      className="text-ink/80 hover:text-ink"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      WhatsApp
-                    </a>
-                  </li>
-                ) : null}
                 {brand.tiktok ? (
                   <li>
                     <a

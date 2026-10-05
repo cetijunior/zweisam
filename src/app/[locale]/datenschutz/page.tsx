@@ -65,6 +65,11 @@ export default async function DatenschutzPage({ params }: { params: Params }) {
           ? "Wenn ihr uns über das Formular oder per E-Mail kontaktiert, verarbeiten wir eure Angaben (Name, E-Mail-Adresse, Anlass, Datum, Nachricht), um eure Anfrage zu beantworten und ggf. ein Angebot zu erstellen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) sowie Art. 6 Abs. 1 lit. a DSGVO (eure Einwilligung). Wir löschen die Daten, sobald die Anfrage abgeschlossen ist und keine gesetzlichen Aufbewahrungspflichten mehr bestehen."
           : "When you contact us via the form or by email, we process your details (name, email address, occasion, date, message) to answer your inquiry and prepare an offer if requested. The legal basis is Art. 6(1)(b) GDPR (pre-contractual steps) and Art. 6(1)(a) GDPR (your consent). We delete the data once the inquiry is concluded and no statutory retention obligations remain."}
       </p>
+      <p>
+        {de
+          ? "Wenn ihr eure Anfrage per WhatsApp sendet, wird sie über WhatsApp (WhatsApp Ireland Ltd. / Meta) übertragen; dafür gelten zusätzlich die Datenschutzbestimmungen von WhatsApp. Ihr könnt uns alternativ jederzeit per E-Mail schreiben."
+          : "If you send your inquiry via WhatsApp, it is transmitted through WhatsApp (WhatsApp Ireland Ltd. / Meta), whose privacy policy also applies. You can always email us instead."}
+      </p>
       {usingSupabase ? (
         <p>
           {de
