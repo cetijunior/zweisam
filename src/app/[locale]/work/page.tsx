@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { WorkGallery } from "@/components/work/WorkGallery";
 import { readSiteData } from "@/lib/data/store";
-import { getHeroImage, getTagline, mediaAlt } from "@/lib/data/selectors";
+import { getTagline } from "@/lib/data/selectors";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
 
@@ -14,14 +14,12 @@ export async function generateMetadata({
   const data = await readSiteData();
   const { locale } = await params;
   const loc = locale as AppLocale;
-  const hero = getHeroImage(data);
   return pageMetadata({
     locale: loc,
     path: "/work",
     title: `${loc === "de" ? "Arbeit" : "Work"} — ${data.settings.studioName}`,
     description: getTagline(data.settings, loc),
     settings: data.settings,
-    image: { url: hero.url, alt: mediaAlt(hero, loc) },
   });
 }
 

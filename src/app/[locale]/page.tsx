@@ -16,7 +16,6 @@ import {
   getPhotographersLine,
   getPublishedProjects,
   getTagline,
-  mediaAlt,
 } from "@/lib/data/selectors";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
@@ -32,14 +31,12 @@ export async function generateMetadata({
   const data = await readSiteData();
   const { settings } = data;
   const loc = locale as AppLocale;
-  const hero = getHeroImage(data);
   return pageMetadata({
     locale: loc,
     path: "",
     title: `${settings.studioName} — ${settings.location}`,
     description: getTagline(settings, loc),
     settings,
-    image: { url: hero.url, alt: mediaAlt(hero, loc) },
   });
 }
 

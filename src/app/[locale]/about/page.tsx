@@ -5,7 +5,6 @@ import {
   getAboutBody,
   getAboutHeadline,
   getPhotographersLine,
-  mediaAlt,
 } from "@/lib/data/selectors";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
@@ -19,14 +18,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const data = await readSiteData();
   const loc = locale as AppLocale;
-  const portrait = data.media.find((m) => m.id === "media-10") ?? data.media[0];
   return pageMetadata({
     locale: loc,
     path: "/about",
     title: `${loc === "de" ? "Über uns" : "About"} — ${data.settings.studioName}`,
     description: getAboutHeadline(data.settings, loc),
     settings: data.settings,
-    image: portrait ? { url: portrait.url, alt: mediaAlt(portrait, loc) } : undefined,
   });
 }
 

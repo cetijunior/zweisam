@@ -9,6 +9,14 @@ export const siteUrl = (
     : "http://localhost:3000")
 ).replace(/\/$/, "");
 
+/** Branded 1200×630 link-preview image (generated from the hero film still). */
+export const DEFAULT_OG_IMAGE = {
+  url: "/brand/og.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Klick Berlin — celebration photography",
+};
+
 export const PUBLIC_PATHS = [
   "",
   "/work",
@@ -55,9 +63,14 @@ export function pageMetadata({
       description,
       url: `/${locale}${path}`,
       locale: locale === "de" ? "de_DE" : "en_US",
-      images: image ? [{ url: image.url, alt: image.alt }] : undefined,
+      images: [image ? { url: image.url, alt: image.alt } : DEFAULT_OG_IMAGE],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image ? image.url : DEFAULT_OG_IMAGE.url],
+    },
     ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
