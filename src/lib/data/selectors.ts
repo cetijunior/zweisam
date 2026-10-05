@@ -72,3 +72,31 @@ export function getHeroImage(data: SiteData): MediaItem {
   }
   return data.media[0] ?? createDefaultData().media[0];
 }
+
+/** URL-safe slug for a shoot page, derived from its English title. */
+export function projectSlug(project: Project) {
+  const base = project.titleEn
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/ß/g, "ss")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return base || project.id;
+}
+
+export function getProjectBySlug(data: SiteData, slug: string) {
+  return getPublishedProjects(data).find(
+    (p) => projectSlug(p) === slug || p.id === slug,
+  );
+}
+
+export function getProjectMedia(data: SiteData, project: Project) {
+  return data.media
+    .filter((m) => m.projectId === project.id && m.published)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+}
+
+export function projectStory(project: Project, locale: Locale) {
+  return (locale === "de" ? project.storyDe : project.storyEn) ?? "";
+}

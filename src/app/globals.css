@@ -215,3 +215,39 @@ body {
     transform: scaleX(1);
   }
 }
+
+/* Impressum / Datenschutz */
+.legal-prose {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+.legal-prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--ink);
+  font-family: var(--font-syne);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.legal-prose h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.legal-prose p + p,
+.legal-prose ul {
+  margin-top: 0.75rem;
+}
+.legal-prose ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.legal-prose a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}

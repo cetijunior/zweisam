@@ -27,9 +27,31 @@ export function StudioJsonLd({
       addressCountry: "DE",
     },
     areaServed: settings.location,
+    telephone: settings.phone || undefined,
     sameAs: [settings.instagram, settings.tiktok].filter(Boolean),
   };
 
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(json).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+}
+
+/** FAQPage data so the questions can appear as rich results. */
+export function FaqJsonLd({ items }: { items: { q: string; a: string }[] }) {
+  const json = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
   return (
     <script
       type="application/ld+json"

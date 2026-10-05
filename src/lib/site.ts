@@ -9,7 +9,16 @@ export const siteUrl = (
     : "http://localhost:3000")
 ).replace(/\/$/, "");
 
-export const PUBLIC_PATHS = ["", "/work", "/about", "/contact"] as const;
+export const PUBLIC_PATHS = [
+  "",
+  "/work",
+  "/about",
+  "/contact",
+  "/impressum",
+  "/datenschutz",
+] as const;
+
+export type PublicPath = (typeof PUBLIC_PATHS)[number] | `/work/${string}`;
 
 /** Canonical + hreflang alternates + OpenGraph for one localized public page. */
 export function pageMetadata({
@@ -19,13 +28,15 @@ export function pageMetadata({
   description,
   settings,
   image,
+  noindex,
 }: {
   locale: AppLocale;
-  path: (typeof PUBLIC_PATHS)[number];
+  path: PublicPath;
   title: string;
   description: string;
   settings: SiteSettings;
   image?: { url: string; alt: string };
+  noindex?: boolean;
 }): Metadata {
   const languages = Object.fromEntries(
     routing.locales.map((l) => [l, `/${l}${path}`]),
@@ -47,5 +58,6 @@ export function pageMetadata({
       images: image ? [{ url: image.url, alt: image.alt }] : undefined,
     },
     twitter: { card: "summary_large_image", title, description },
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }

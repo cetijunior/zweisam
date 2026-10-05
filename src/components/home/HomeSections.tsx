@@ -23,6 +23,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import {
   getTagline,
   mediaAlt,
+  projectSlug,
   projectTitle,
 } from "@/lib/data/selectors";
 import type { MediaItem, Project, SiteData } from "@/lib/data/types";
@@ -199,7 +200,7 @@ export function MomentsRail({
                 key={project.id}
                 className="w-[78vw] max-w-[320px] shrink-0 sm:w-[60vw] md:w-[360px]"
               >
-                <Link href="/work" className="group block">
+                <Link href={`/work/${projectSlug(project)}`} className="group block">
                   <ImageReveal delay={Math.min(i, 4) * 0.05}>
                     <ParallaxFrame
                       className="relative aspect-[3/4] bg-line"

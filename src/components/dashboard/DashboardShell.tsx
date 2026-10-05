@@ -8,7 +8,7 @@ import type { SiteSettings } from "@/lib/data/types";
 
 const links = [
   { href: "/dashboard", label: "Library" },
-  { href: "/dashboard/upload", label: "Upload" },
+  { href: "/dashboard/upload", label: "Photoshoots" },
   { href: "/dashboard/brand", label: "Brand" },
   { href: "/dashboard/inquiries", label: "Inquiries" },
 ];

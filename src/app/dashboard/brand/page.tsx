@@ -11,6 +11,11 @@ const FIELDS: { key: keyof SiteSettings; label: string; multiline?: boolean }[] 
     { key: "email", label: "Email" },
     { key: "instagram", label: "Instagram URL" },
     { key: "tiktok", label: "TikTok URL" },
+    { key: "whatsapp", label: "WhatsApp number (digits only, with country code, e.g. 4915112345678)" },
+    { key: "phone", label: "Phone (shown on contact page + Impressum)" },
+    { key: "legalName", label: "Impressum: full legal name(s) — required by law" },
+    { key: "legalAddress", label: "Impressum: street, postcode + city — required by law", multiline: true },
+    { key: "vatId", label: "Impressum: USt-IdNr. (leave empty if Kleinunternehmer)" },
     { key: "taglineDe", label: "Tagline (DE)" },
     { key: "taglineEn", label: "Tagline (EN)" },
     { key: "photographersDe", label: "Photographers line (DE)" },
@@ -71,7 +76,7 @@ export default function DashboardBrandPage() {
             {field.multiline ? (
               <textarea
                 rows={4}
-                value={settings[field.key]}
+                value={settings[field.key] ?? ""}
                 onChange={(e) =>
                   setSettings({ ...settings, [field.key]: e.target.value })
                 }
@@ -79,7 +84,7 @@ export default function DashboardBrandPage() {
               />
             ) : (
               <input
-                value={settings[field.key]}
+                value={settings[field.key] ?? ""}
                 onChange={(e) =>
                   setSettings({ ...settings, [field.key]: e.target.value })
                 }
@@ -91,7 +96,7 @@ export default function DashboardBrandPage() {
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full bg-ink px-6 py-3 text-sm text-cream disabled:opacity-60"
+          className="rounded-full bg-ink px-6 py-3 text-sm text-white disabled:opacity-60"
         >
           {pending ? "Saving…" : "Save brand"}
         </button>

@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AboutTeaser } from "@/components/about/AboutContent";
 import { InquireTeaser } from "@/components/contact/ContactForm";
 import { Hero, MomentsRail } from "@/components/home/HomeSections";
+import { Faq, Marquee, Process, Services } from "@/components/home/InfoSections";
+import { FAQ_KEYS } from "@/lib/faq";
 import {
   CategoryChapters,
   WorkFragments,
@@ -18,7 +20,7 @@ import {
 } from "@/lib/data/selectors";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
-import { StudioJsonLd } from "@/components/seo/StudioJsonLd";
+import { FaqJsonLd, StudioJsonLd } from "@/components/seo/StudioJsonLd";
 import { readSiteData } from "@/lib/data/store";
 
 export async function generateMetadata({
@@ -50,6 +52,11 @@ export default async function HomePage({
   setRequestLocale(locale);
   const tAbout = await getTranslations("about");
   const tHome = await getTranslations("home");
+  const tFaq = await getTranslations("faq");
+  const faq = FAQ_KEYS.map((k) => ({
+    q: tFaq(`items.${k}.q`),
+    a: tFaq(`items.${k}.a`),
+  }));
   const data = await readSiteData();
   const loc = locale as "de" | "en";
   const hero = getHeroImage(data);
@@ -62,9 +69,12 @@ export default async function HomePage({
   return (
     <>
       <StudioJsonLd settings={data.settings} locale={loc} image={hero.url} />
+      <FaqJsonLd items={faq} />
       <Hero cover={hero} />
+      <Marquee />
       <WorkFragments data={data} />
       <CategoryChapters data={data} categories={data.categories} />
+      <Services />
       <AboutTeaser
         title={tAbout("title")}
         headline={getAboutHeadline(data.settings, loc)}
@@ -75,7 +85,9 @@ export default async function HomePage({
         imageAlt={loc === "de" ? aboutImage.altDe : aboutImage.altEn}
         cta={tHome("aboutCta")}
       />
+      <Process />
       <MomentsRail data={data} projects={projects} />
+      <Faq />
       <InquireTeaser
         imageUrl={inquireImage.url}
         imageAlt={loc === "de" ? inquireImage.altDe : inquireImage.altEn}

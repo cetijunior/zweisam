@@ -54,7 +54,7 @@ export default function DashboardLoginPage() {
         <button
           type="submit"
           disabled={pending}
-          className="mt-6 w-full rounded-full bg-ink py-3 text-sm text-cream disabled:opacity-60"
+          className="mt-6 w-full rounded-full bg-ink py-3 text-sm text-white disabled:opacity-60"
         >
           Enter
         </button>

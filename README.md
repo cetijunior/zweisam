@@ -23,6 +23,15 @@ npm run dev
 
 The public portfolio builds from in-code defaults (Unsplash placeholders). On Vercel, the local JSON file / disk uploads are ephemeral — the marketing site still works; connect Supabase before relying on the dashboard for lasting content or file uploads.
 
+## Go-live checklist (custom domain)
+
+1. Vercel → Project → Settings → Domains: add the domain (and `www.`), set the DNS records the registrar shows; Vercel issues HTTPS automatically.
+2. Environment variables (Production): `NEXT_PUBLIC_SITE_URL=https://<domain>`, `DASHBOARD_PASSWORD`, `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`, optionally `RESEND_API_KEY` + `INQUIRY_NOTIFY_EMAIL` + `INQUIRY_FROM_EMAIL`. Redeploy after changing them.
+3. Dashboard → Brand: fill in the Impressum name + address (legally required in Germany), email, WhatsApp, phone.
+4. Dashboard → Photoshoots: create a shoot per set and upload the photos; each becomes a page at `/work/<title>`.
+5. Google Search Console: add the domain, submit `https://<domain>/sitemap.xml`. Create a Google Business Profile linking to the site.
+6. Send a test inquiry through the live form and check it arrives.
+
 ## Replaceable brand name
 
 Open **Dashboard → Brand** and change **Studio name**. It flows through nav, hero, footer, metadata, and contact copy via `site_settings` / `BrandProvider`. Default brand is **Klick Berlin**.

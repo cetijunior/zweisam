@@ -24,6 +24,15 @@ export interface SiteSettings {
   location: string;
   photographersDe: string;
   photographersEn: string;
+  /** WhatsApp number in international format, digits only (e.g. 4915112345678). Empty hides the button. */
+  whatsapp: string;
+  phone: string;
+  /** Impressum (§ 5 DDG): full legal name(s) of the responsible person(s) */
+  legalName: string;
+  /** Impressum: street + postcode/city, one line each */
+  legalAddress: string;
+  /** Impressum: USt-IdNr. or empty for Kleinunternehmer */
+  vatId: string;
 }
 
 export interface Category {
@@ -57,6 +66,9 @@ export interface Project {
   published: boolean;
   categoryIds: string[];
   coverMediaId: string | null;
+  /** Short story shown on the shoot page */
+  storyDe?: string;
+  storyEn?: string;
 }
 
 export interface Inquiry {

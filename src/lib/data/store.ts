@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { createDefaultData } from "./defaults";
+import { createDefaultData, DEFAULT_SETTINGS } from "./defaults";
 import type {
   Inquiry,
   MediaItem,
@@ -84,11 +84,16 @@ export async function saveUpload(
 /** In-memory fallback — Vercel’s filesystem is read-only at runtime */
 let memoryCache: SiteData | null = null;
 
+/** Fills settings added after a document was first saved, so older data keeps working. */
+function normalize(data: SiteData): SiteData {
+  return { ...data, settings: { ...DEFAULT_SETTINGS, ...data.settings } };
+}
+
 export async function readSiteData(): Promise<SiteData> {
-  if (usingSupabase) return readFromSupabase();
+  if (usingSupabase) return normalize(await readFromSupabase());
   try {
     const raw = await fs.readFile(DATA_PATH, "utf8");
-    memoryCache = JSON.parse(raw) as SiteData;
+    memoryCache = normalize(JSON.parse(raw) as SiteData);
     return memoryCache;
   } catch {
     if (memoryCache) return memoryCache;

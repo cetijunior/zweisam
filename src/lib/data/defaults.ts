@@ -18,6 +18,11 @@ export const DEFAULT_SETTINGS = {
   location: "Berlin",
   photographersDe: "Ein Paar. Ein Studio.",
   photographersEn: "A couple. A studio.",
+  whatsapp: "",
+  phone: "",
+  legalName: "",
+  legalAddress: "",
+  vatId: "",
 } as const;
 
 const cat = (

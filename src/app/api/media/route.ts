@@ -42,6 +42,8 @@ export async function POST(req: NextRequest) {
     const projectId = String(form.get("projectId") ?? "proj-uploads");
     const altDe = String(form.get("altDe") ?? "Upload");
     const altEn = String(form.get("altEn") ?? "Upload");
+    const width = Math.round(Number(form.get("width"))) || 1600;
+    const height = Math.round(Number(form.get("height"))) || 1200;
 
     if (!file) {
       return NextResponse.json({ error: "No file" }, { status: 400 });
@@ -94,8 +96,8 @@ export async function POST(req: NextRequest) {
       id,
       projectId: project.id,
       url,
-      width: 1600,
-      height: 1200,
+      width,
+      height,
       altDe,
       altEn,
       sortOrder: data.media.filter((m) => m.projectId === project!.id).length,

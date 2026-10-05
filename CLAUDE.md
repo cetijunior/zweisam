@@ -30,7 +30,7 @@ AGENTS.md is the Next.js boilerplate block. Project rules are below.
 ## 3. Layout
 
 ```
-src/app/[locale]/     public site (home, work, about, contact)
+src/app/[locale]/     public site (home, work, work/[slug] shoot pages, about, contact, impressum, datenschutz)
 src/app/dashboard/    owner dashboard, gated by DASHBOARD_PASSWORD
 src/app/api/          dashboard writes / uploads
 src/components/       home work about contact layout brand motion theme dashboard
@@ -55,7 +55,10 @@ npm run build && npm run lint
 ## 6. Open ends
 
 - Persistence: `store.ts` uses Supabase when `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` are set (whole `SiteData` in `site_document`, uploads in the public `portfolio` bucket, see `003_site_document.sql`), else the local JSON file. **Until those env vars are set on Vercel, dashboard edits and inquiries don't persist.** The relational tables in `001_initial.sql` are unused for now.
-- Replace the placeholder imagery with the studio's own.
+- Replace the placeholder imagery with the studio's own (Dashboard → Photoshoots creates a shoot + bulk-uploads its set).
+- Impressum/Datenschutz read `legalName`/`legalAddress`/`vatId` from settings and show highlighted placeholders until filled in Dashboard → Brand.
+- Inquiry emails go out via Resend only when `RESEND_API_KEY` + `INQUIRY_NOTIFY_EMAIL` are set (`src/lib/notify.ts`).
+- Shoot slugs derive from `titleEn` (`projectSlug()`); renaming a shoot changes its URL.
 
 ## 7. Hosting
 

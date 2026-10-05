@@ -2,7 +2,11 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { BrandProvider } from "@/components/brand/BrandProvider";
-import { SiteFooter, SiteHeader } from "@/components/layout/SiteChrome";
+import {
+  FloatingActions,
+  SiteFooter,
+  SiteHeader,
+} from "@/components/layout/SiteChrome";
 import { ScrollProgress } from "@/components/motion/primitives";
 import { routing } from "@/i18n/routing";
 import { readSiteData } from "@/lib/data/store";
@@ -35,6 +39,7 @@ export default async function LocaleLayout({
           {children}
         </main>
         <SiteFooter categories={data.categories} />
+        <FloatingActions />
       </BrandProvider>
     </NextIntlClientProvider>
   );

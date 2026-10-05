@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif, Syne } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
@@ -31,6 +31,16 @@ export const metadata: Metadata = {
   },
   description:
     "Celebration photography in Berlin — couples, gender reveals, birthdays, kids parties, gatherings.",
+  applicationName: "Klick Berlin",
+  formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f5f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#11100f" },
+  ],
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({

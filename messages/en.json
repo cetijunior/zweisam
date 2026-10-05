@@ -6,7 +6,12 @@
     "inquire": "Inquire",
     "skip": "Skip to content",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "legal": "Legal",
+    "imprint": "Imprint",
+    "privacy": "Privacy",
+    "whatsapp": "Chat on WhatsApp",
+    "backToTop": "Back to top"
   },
   "home": {
     "cta": "View work",
@@ -17,12 +22,24 @@
     "viewAllWork": "View all work",
     "aboutCta": "More about us",
     "inquireHeadline": "Ready for your next celebration?",
-    "inquireSub": "Small gatherings. Real moments. We’re here."
+    "inquireSub": "Small gatherings. Real moments. We’re here.",
+    "marquee": [
+      "Couples",
+      "Gender reveals",
+      "Birthdays",
+      "Kids parties",
+      "Gatherings",
+      "Indoor",
+      "Outdoor",
+      "Berlin"
+    ]
   },
   "work": {
     "title": "Work",
     "all": "All",
-    "empty": "No images in this category yet."
+    "empty": "No images in this category yet.",
+    "stories": "Stories",
+    "allPhotos": "All photos"
   },
   "about": {
     "title": "About",
@@ -67,7 +84,12 @@
       "gatherings": "Gathering",
       "other": "Other"
     },
-    "error": "Something went wrong. Please try again or email us directly."
+    "error": "Something went wrong. Please try again or email us directly.",
+    "consent": "I agree that my details will be used to answer my inquiry. More in the",
+    "consentLink": "privacy policy",
+    "labelWhatsapp": "WhatsApp",
+    "labelPhone": "Phone",
+    "response": "We usually reply within 24 hours."
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -82,5 +104,128 @@
     "title": "This page doesn't exist.",
     "body": "It may have moved. Have a look at our work instead.",
     "cta": "Back to home"
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "What we can photograph for you",
+    "intro": "Every session is shaped around your day. These are starting points — tell us what you have in mind and we’ll put together an offer.",
+    "cta": "Ask for availability",
+    "onRequest": "Price on request",
+    "items": {
+      "couples": {
+        "title": "Couple session",
+        "text": "A relaxed walk through your favourite corner of Berlin — golden hour, quiet streets or your own home.",
+        "points": [
+          "1–2 hours",
+          "Location of your choice",
+          "Edited online gallery"
+        ]
+      },
+      "reveal": {
+        "title": "Gender reveal",
+        "text": "The build-up, the moment, the reactions. We stay in the background and catch every face.",
+        "points": [
+          "Before, during & after",
+          "Family and guest portraits",
+          "Quick sneak peek"
+        ]
+      },
+      "party": {
+        "title": "Birthdays & kids parties",
+        "text": "Candles, cake, chaos and joy — documented honestly, with patience for the little ones.",
+        "points": [
+          "2–4 hours",
+          "Indoor or outdoor",
+          "Candid & group photos"
+        ]
+      },
+      "gathering": {
+        "title": "Gatherings",
+        "text": "Family brunches, engagements, small get-togethers — the in-between celebrations that deserve to be remembered.",
+        "points": [
+          "Flexible duration",
+          "Details & atmosphere",
+          "Print-ready files"
+        ]
+      }
+    }
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "From first message to final gallery",
+    "steps": {
+      "s1": {
+        "title": "Tell us about it",
+        "text": "Send a short inquiry with date, place and occasion. We answer personally, usually within 24 hours."
+      },
+      "s2": {
+        "title": "We plan together",
+        "text": "A quick call or chat about mood, timing and the people who matter. No stiff posing, promise."
+      },
+      "s3": {
+        "title": "The day itself",
+        "text": "We arrive early, stay unobtrusive and let the moments happen — you just celebrate."
+      },
+      "s4": {
+        "title": "Your gallery",
+        "text": "A curated, edited online gallery to download, share and print — delivered within about two weeks."
+      }
+    }
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Good to know",
+    "items": {
+      "q1": {
+        "q": "Where do you photograph?",
+        "a": "All over Berlin — parks, cafés, your home, rented venues. Brandenburg and further away on request."
+      },
+      "q2": {
+        "q": "How far in advance should we book?",
+        "a": "Weekends fill up quickly, so ideally 3–6 weeks ahead. Short notice? Just ask — sometimes it works."
+      },
+      "q3": {
+        "q": "How do we receive our photos?",
+        "a": "As a private online gallery in high resolution, ready to download, share and print."
+      },
+      "q4": {
+        "q": "What if it rains?",
+        "a": "We move indoors, use covered spots or reschedule outdoor couple sessions free of charge."
+      },
+      "q5": {
+        "q": "Do you speak English?",
+        "a": "Yes — we work in German and English, so everyone at your celebration feels at home."
+      },
+      "q6": {
+        "q": "Can we share the photos on social media?",
+        "a": "Of course. We only ask for a mention if you’re happy to — and we never post your photos without your permission."
+      }
+    }
+  },
+  "shoot": {
+    "back": "All work",
+    "photos": "{count} photos",
+    "next": "Next story",
+    "cta": "Want a story like this?",
+    "ctaButton": "Inquire now",
+    "more": "More stories"
+  },
+  "lightbox": {
+    "close": "Close",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "of": "of",
+    "viewShoot": "View full story"
+  },
+  "legal": {
+    "imprint": "Imprint",
+    "privacy": "Privacy policy",
+    "missing": "Details are being added.",
+    "updated": "Last updated"
+  },
+  "error": {
+    "title": "Something went wrong.",
+    "body": "Please try again — or get in touch directly.",
+    "retry": "Try again"
   }
 }

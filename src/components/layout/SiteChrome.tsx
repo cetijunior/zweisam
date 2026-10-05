@@ -388,6 +388,18 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
                     {brand.handle}
                   </a>
                 </li>
+                {brand.whatsapp ? (
+                  <li>
+                    <a
+                      href={`https://wa.me/${brand.whatsapp}`}
+                      className="text-ink/80 hover:text-ink"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      WhatsApp
+                    </a>
+                  </li>
+                ) : null}
                 {brand.tiktok ? (
                   <li>
                     <a
@@ -420,8 +432,16 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
           <p>
             © {year} {brand.studioName}. {t("rights")}
           </p>
-          <p>
-            {t("studio")} · {brand.location}
+          <p className="flex flex-wrap gap-x-5 gap-y-1">
+            <Link href="/impressum" className="hover:text-ink">
+              {tn("imprint")}
+            </Link>
+            <Link href="/datenschutz" className="hover:text-ink">
+              {tn("privacy")}
+            </Link>
+            <span>
+              {t("studio")} · {brand.location}
+            </span>
           </p>
           <p>
             {t("madeBy")}{" "}
@@ -437,5 +457,53 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
         </div>
       </div>
     </footer>
+  );
+}
+
+/** Bottom-right shortcuts: WhatsApp chat (when configured) and back to top. */
+export function FloatingActions() {
+  const t = useTranslations("nav");
+  const brand = useBrand();
+  const { scrollY } = useScroll();
+  const [visible, setVisible] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 700));
+
+  return (
+    <AnimatePresence>
+      {visible ? (
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 16 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed right-4 z-40 flex flex-col items-end gap-2.5 md:right-6"
+          style={{ bottom: "calc(1rem + var(--safe-bottom))" }}
+        >
+          <button
+            type="button"
+            aria-label={t("backToTop")}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong bg-paper/90 text-ink backdrop-blur-md transition hover:border-ink"
+          >
+            <span aria-hidden>↑</span>
+          </button>
+          {brand.whatsapp ? (
+            <a
+              href={`https://wa.me/${brand.whatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t("whatsapp")}
+              className="flex h-12 items-center gap-2 rounded-full bg-[#25D366] px-4 text-sm font-medium text-white shadow-lg shadow-black/15 transition hover:brightness-105"
+            >
+              <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+                <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z" />
+              </svg>
+              <span className="hidden sm:inline">WhatsApp</span>
+            </a>
+          ) : null}
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }

@@ -5,7 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { DrawLine, ImageReveal, Reveal, ScrollWords } from "@/components/motion/primitives";
-import { categoryName, mediaAlt, projectTitle } from "@/lib/data/selectors";
+import { categoryName, mediaAlt, projectSlug, projectTitle } from "@/lib/data/selectors";
+import { Lightbox, type LightboxItem } from "@/components/work/Lightbox";
+import { StoryCards } from "@/components/work/ShootView";
 import type { CategorySlug, SiteData } from "@/lib/data/types";
 
 export function WorkGallery({
@@ -18,7 +20,7 @@ export function WorkGallery({
   const t = useTranslations("work");
   const locale = useLocale() as "de" | "en";
   const [active, setActive] = useState<string>(initialCategory ?? "all");
-  const [lightbox, setLightbox] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
   const categories = [...data.categories].sort(
     (a, b) => a.sortOrder - b.sortOrder,
@@ -44,7 +46,15 @@ export function WorkGallery({
     );
   }, [data.media, projects]);
 
-  const lightboxItem = images.find((i) => i.media.id === lightbox);
+  const lightboxItems: LightboxItem[] = images.map(({ media, project }) => ({
+    id: media.id,
+    url: media.url,
+    width: media.width,
+    height: media.height,
+    alt: mediaAlt(media, locale),
+    caption: projectTitle(project, locale),
+    href: `/work/${projectSlug(project)}`,
+  }));
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-36">
@@ -62,7 +72,10 @@ export function WorkGallery({
           <FilterChip
             label={t("all")}
             active={active === "all"}
-            onClick={() => setActive("all")}
+            onClick={() => {
+              setActive("all");
+              setLightbox(null);
+            }}
           />
           {categories.map((cat) => (
             <FilterChip
@@ -74,6 +87,18 @@ export function WorkGallery({
           ))}
         </div>
       </div>
+
+      {projects.length > 0 ? (
+        <div className="-mx-5 mt-8 px-5 md:mx-0 md:mt-12 md:px-0">
+          <p className="mb-4 text-[0.65rem] uppercase tracking-[0.24em] text-muted">
+            {t("stories")}
+          </p>
+          <StoryCards data={data} projects={projects} />
+          <p className="mb-2 mt-14 text-[0.65rem] uppercase tracking-[0.24em] text-muted">
+            {t("allPhotos")}
+          </p>
+        </div>
+      ) : null}
 
       {images.length === 0 ? (
         <p className="mt-16 text-muted">{t("empty")}</p>
@@ -97,7 +122,7 @@ export function WorkGallery({
                 <ImageReveal delay={(i % 5) * 0.03}>
                   <button
                     type="button"
-                    onClick={() => setLightbox(media.id)}
+                    onClick={() => setLightbox(i)}
                     className="group relative block w-full overflow-hidden text-left"
                   >
                     <Image
@@ -121,42 +146,7 @@ export function WorkGallery({
         </div>
       )}
 
-      <AnimatePresence>
-        {lightboxItem ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-paper/95 p-4 backdrop-blur-sm"
-            onClick={() => setLightbox(null)}
-            style={{ paddingBottom: "var(--safe-bottom)" }}
-          >
-            <button
-              type="button"
-              className="absolute right-5 top-5 min-h-11 min-w-11 text-[0.68rem] uppercase tracking-[0.2em] text-muted"
-              onClick={() => setLightbox(null)}
-            >
-              Close
-            </button>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="relative max-h-[85vh] max-w-5xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={lightboxItem.media.url}
-                alt={mediaAlt(lightboxItem.media, locale)}
-                width={lightboxItem.media.width}
-                height={lightboxItem.media.height}
-                className="max-h-[85vh] w-auto object-contain"
-              />
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <Lightbox items={lightboxItems} index={lightbox} onChange={setLightbox} />
     </div>
   );
 }

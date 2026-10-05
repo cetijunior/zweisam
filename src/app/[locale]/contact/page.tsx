@@ -25,10 +25,13 @@ export async function generateMetadata({
 
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ type?: string }>;
 }) {
   const { locale } = await params;
+  const { type } = await searchParams;
   setRequestLocale(locale);
   const data = await readSiteData();
   const loc = locale as "de" | "en";
@@ -39,6 +42,7 @@ export default async function ContactPage({
     <ContactForm
       sideImageUrl={side.url}
       sideImageAlt={loc === "de" ? side.altDe : side.altEn}
+      initialType={type}
     />
   );
 }

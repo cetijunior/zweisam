@@ -6,7 +6,12 @@
     "inquire": "Anfragen",
     "skip": "Zum Inhalt springen",
     "openMenu": "Menü öffnen",
-    "closeMenu": "Menü schließen"
+    "closeMenu": "Menü schließen",
+    "legal": "Rechtliches",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "whatsapp": "Auf WhatsApp schreiben",
+    "backToTop": "Nach oben"
   },
   "home": {
     "cta": "Arbeit ansehen",
@@ -17,12 +22,24 @@
     "viewAllWork": "Alle Arbeiten",
     "aboutCta": "Mehr über uns",
     "inquireHeadline": "Bereit für eure nächste Feier?",
-    "inquireSub": "Kleine Feste. Echte Momente. Wir sind da."
+    "inquireSub": "Kleine Feste. Echte Momente. Wir sind da.",
+    "marquee": [
+      "Paare",
+      "Gender Reveals",
+      "Geburtstage",
+      "Kinderfeste",
+      "Zusammenkünfte",
+      "Drinnen",
+      "Draußen",
+      "Berlin"
+    ]
   },
   "work": {
     "title": "Arbeit",
     "all": "Alle",
-    "empty": "Noch keine Bilder in dieser Kategorie."
+    "empty": "Noch keine Bilder in dieser Kategorie.",
+    "stories": "Geschichten",
+    "allPhotos": "Alle Fotos"
   },
   "about": {
     "title": "Über uns",
@@ -67,7 +84,12 @@
       "gatherings": "Zusammenkunft",
       "other": "Anderes"
     },
-    "error": "Das hat leider nicht geklappt. Bitte versuch es noch einmal oder schreib uns direkt eine E-Mail."
+    "error": "Das hat leider nicht geklappt. Bitte versuch es noch einmal oder schreib uns direkt eine E-Mail.",
+    "consent": "Ich bin einverstanden, dass meine Angaben zur Beantwortung meiner Anfrage verwendet werden. Mehr in der",
+    "consentLink": "Datenschutzerklärung",
+    "labelWhatsapp": "WhatsApp",
+    "labelPhone": "Telefon",
+    "response": "Wir antworten meist innerhalb von 24 Stunden."
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten.",
@@ -82,5 +104,128 @@
     "title": "Diese Seite gibt es nicht.",
     "body": "Vielleicht wurde sie verschoben. Schau dir stattdessen unsere Arbeiten an.",
     "cta": "Zur Startseite"
+  },
+  "services": {
+    "eyebrow": "Leistungen",
+    "title": "Was wir für euch fotografieren",
+    "intro": "Jedes Shooting richtet sich nach eurem Tag. Das hier sind Ausgangspunkte — erzählt uns, was ihr vorhabt, und wir schicken euch ein Angebot.",
+    "cta": "Verfügbarkeit anfragen",
+    "onRequest": "Preis auf Anfrage",
+    "items": {
+      "couples": {
+        "title": "Paarshooting",
+        "text": "Ein entspannter Spaziergang durch eure Lieblingsecke Berlins — goldene Stunde, ruhige Straßen oder euer Zuhause.",
+        "points": [
+          "1–2 Stunden",
+          "Ort nach Wahl",
+          "Bearbeitete Online-Galerie"
+        ]
+      },
+      "reveal": {
+        "title": "Gender Reveal",
+        "text": "Die Spannung, der Moment, die Reaktionen. Wir bleiben im Hintergrund und fangen jedes Gesicht ein.",
+        "points": [
+          "Davor, währenddessen & danach",
+          "Familien- und Gästeporträts",
+          "Schnelle Vorschau"
+        ]
+      },
+      "party": {
+        "title": "Geburtstage & Kinderfeste",
+        "text": "Kerzen, Kuchen, Chaos und Freude — ehrlich festgehalten, mit Geduld für die Kleinen.",
+        "points": [
+          "2–4 Stunden",
+          "Drinnen oder draußen",
+          "Spontane & Gruppenfotos"
+        ]
+      },
+      "gathering": {
+        "title": "Zusammenkünfte",
+        "text": "Familienbrunch, Verlobung, kleine Treffen — die Feiern dazwischen, die es wert sind, erinnert zu werden.",
+        "points": [
+          "Flexible Dauer",
+          "Details & Atmosphäre",
+          "Druckfertige Dateien"
+        ]
+      }
+    }
+  },
+  "process": {
+    "eyebrow": "So läuft’s",
+    "title": "Von der ersten Nachricht zur fertigen Galerie",
+    "steps": {
+      "s1": {
+        "title": "Erzählt uns davon",
+        "text": "Schickt eine kurze Anfrage mit Datum, Ort und Anlass. Wir antworten persönlich, meist innerhalb von 24 Stunden."
+      },
+      "s2": {
+        "title": "Wir planen gemeinsam",
+        "text": "Ein kurzes Telefonat oder Chat über Stimmung, Ablauf und die wichtigsten Menschen. Kein steifes Posieren, versprochen."
+      },
+      "s3": {
+        "title": "Der große Tag",
+        "text": "Wir sind früh da, bleiben unauffällig und lassen die Momente passieren — ihr feiert einfach."
+      },
+      "s4": {
+        "title": "Eure Galerie",
+        "text": "Eine kuratierte, bearbeitete Online-Galerie zum Herunterladen, Teilen und Drucken — in etwa zwei Wochen."
+      }
+    }
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Gut zu wissen",
+    "items": {
+      "q1": {
+        "q": "Wo fotografiert ihr?",
+        "a": "Überall in Berlin — Parks, Cafés, bei euch zu Hause, in gemieteten Räumen. Brandenburg und weiter weg auf Anfrage."
+      },
+      "q2": {
+        "q": "Wie früh sollten wir buchen?",
+        "a": "Wochenenden sind schnell weg, ideal sind 3–6 Wochen Vorlauf. Kurzfristig? Fragt einfach — manchmal klappt’s."
+      },
+      "q3": {
+        "q": "Wie bekommen wir unsere Fotos?",
+        "a": "Als private Online-Galerie in hoher Auflösung, bereit zum Herunterladen, Teilen und Drucken."
+      },
+      "q4": {
+        "q": "Was, wenn es regnet?",
+        "a": "Wir gehen nach drinnen, suchen überdachte Orte oder verschieben Paarshootings draußen kostenlos."
+      },
+      "q5": {
+        "q": "Sprecht ihr Englisch?",
+        "a": "Ja — wir arbeiten auf Deutsch und Englisch, damit sich alle auf eurer Feier wohlfühlen."
+      },
+      "q6": {
+        "q": "Dürfen wir die Fotos auf Social Media teilen?",
+        "a": "Natürlich. Wir freuen uns über eine Markierung, wenn ihr mögt — und posten eure Fotos nie ohne eure Erlaubnis."
+      }
+    }
+  },
+  "shoot": {
+    "back": "Alle Arbeiten",
+    "photos": "{count} Fotos",
+    "next": "Nächste Geschichte",
+    "cta": "Wollt ihr so eine Geschichte?",
+    "ctaButton": "Jetzt anfragen",
+    "more": "Weitere Geschichten"
+  },
+  "lightbox": {
+    "close": "Schließen",
+    "prev": "Vorheriges Foto",
+    "next": "Nächstes Foto",
+    "of": "von",
+    "viewShoot": "Ganze Geschichte ansehen"
+  },
+  "legal": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutzerklärung",
+    "missing": "Angaben werden ergänzt.",
+    "updated": "Stand"
+  },
+  "error": {
+    "title": "Da ist etwas schiefgelaufen.",
+    "body": "Bitte versucht es noch einmal — oder meldet euch direkt bei uns.",
+    "retry": "Erneut versuchen"
   }
 }

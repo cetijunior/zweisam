@@ -32,9 +32,11 @@ const EVENT_KEYS = [
 export function ContactForm({
   sideImageUrl,
   sideImageAlt,
+  initialType,
 }: {
   sideImageUrl?: string;
   sideImageAlt?: string;
+  initialType?: string;
 }) {
   const t = useTranslations("contact");
   const brand = useBrand();
@@ -58,6 +60,7 @@ export function ContactForm({
         eventDate: form.get("eventDate"),
         message: form.get("message"),
         company: form.get("company"),
+        consent: form.get("consent") === "on",
         locale,
       }),
     }).catch(() => null);
@@ -84,10 +87,32 @@ export function ContactForm({
             <p className="mt-6 max-w-sm text-base leading-relaxed text-ink-soft">
               {t("intro")}
             </p>
+            <p className="mt-4 flex items-center gap-2.5 text-sm text-muted">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              {t("response")}
+            </p>
           </Reveal>
 
           <Reveal delay={0.1} className="mt-12 space-y-6 border-t border-line pt-10">
             <InfoRow label={t("labelEmail")} value={brand.email} href={`mailto:${brand.email}`} />
+            {brand.whatsapp ? (
+              <InfoRow
+                label={t("labelWhatsapp")}
+                value={`+${brand.whatsapp}`}
+                href={`https://wa.me/${brand.whatsapp}`}
+                external
+              />
+            ) : null}
+            {brand.phone ? (
+              <InfoRow
+                label={t("labelPhone")}
+                value={brand.phone}
+                href={`tel:${brand.phone.replace(/\s/g, "")}`}
+              />
+            ) : null}
             <InfoRow label={t("labelLocation")} value={brand.location} />
             <InfoRow
               label={t("labelSocial")}
@@ -162,6 +187,11 @@ export function ContactForm({
                       id="field-eventType"
                       name="eventType"
                       required
+                      defaultValue={
+                        EVENT_KEYS.includes(initialType as (typeof EVENT_KEYS)[number])
+                          ? initialType
+                          : undefined
+                      }
                       className="w-full border-b border-line bg-transparent py-3 text-ink outline-none transition-colors focus:border-ink"
                     >
                       {EVENT_KEYS.map((key) => (
@@ -171,7 +201,12 @@ export function ContactForm({
                       ))}
                     </select>
                   </div>
-                  <Field label={t("eventDate")} name="eventDate" type="date" />
+                  <Field
+                    label={t("eventDate")}
+                    name="eventDate"
+                    type="date"
+                    min={new Date().toISOString().slice(0, 10)}
+                  />
                 </div>
                 <div>
                   <label
@@ -199,6 +234,21 @@ export function ContactForm({
                   aria-hidden
                   className="absolute -left-[9999px] h-px w-px opacity-0"
                 />
+                <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    required
+                    className="mt-1 h-4 w-4 shrink-0 accent-[var(--accent)]"
+                  />
+                  <span>
+                    {t("consent")}{" "}
+                    <Link href="/datenschutz" className="underline underline-offset-2 hover:text-ink">
+                      {t("consentLink")}
+                    </Link>
+                    .
+                  </span>
+                </label>
                 {failed ? (
                   <p role="alert" className="text-sm text-accent">
                     {t("error")}
@@ -344,12 +394,14 @@ function Field({
   type = "text",
   autoComplete,
   required,
+  min,
 }: {
   label: string;
   name: string;
   type?: string;
   autoComplete?: string;
   required?: boolean;
+  min?: string;
 }) {
   const id = `field-${name}`;
   return (
@@ -366,6 +418,7 @@ function Field({
         autoComplete={autoComplete}
         type={type}
         required={required}
+        min={min}
         className="w-full border-b border-line bg-transparent py-3 text-ink outline-none transition-colors focus:border-ink"
       />
     </div>
