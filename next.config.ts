@@ -15,8 +15,20 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
 ];
 
+/** Old Vercel addresses that Google indexed before the custom domain; sent permanently to the real site. */
+const LEGACY_HOSTS = ["zweisam-dusky.vercel.app", "klickberlin.vercel.app"];
+const CANONICAL_ORIGIN = "https://www.klickberlin.com";
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  async redirects() {
+    return LEGACY_HOSTS.map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: `${CANONICAL_ORIGIN}/:path*`,
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
