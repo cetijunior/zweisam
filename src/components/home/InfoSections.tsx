@@ -6,12 +6,15 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { DrawLine, Reveal, ScrollWords } from "@/components/motion/primitives";
 import { FAQ_KEYS } from "@/lib/faq";
+import { SERVICES } from "@/lib/services";
 
-const SERVICES = [
-  { key: "couples", type: "couples" },
-  { key: "reveal", type: "gender-reveal" },
-  { key: "party", type: "birthdays" },
-  { key: "gathering", type: "gatherings" },
+const SERVICE_COUNT = SERVICES.length;
+
+const SERVICE_CARDS = [
+  { key: "couples", slug: "paarshooting-berlin" },
+  { key: "reveal", slug: "gender-reveal-fotograf-berlin" },
+  { key: "party", slug: "kindergeburtstag-fotograf-berlin" },
+  { key: "gathering", slug: "dinnerparty-fotograf-berlin" },
 ] as const;
 const STEP_KEYS = ["s1", "s2", "s3", "s4"] as const;
 
@@ -82,10 +85,10 @@ export function Services() {
         </div>
 
         <div className="mt-12 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4 md:mt-16">
-          {SERVICES.map(({ key, type }, i) => (
+          {SERVICE_CARDS.map(({ key, slug }, i) => (
             <Reveal key={key} delay={i * 0.06} className="bg-paper">
               <Link
-                href={{ pathname: "/contact", query: { type } }}
+                href={`/services/${slug}`}
                 className="group relative flex h-full flex-col p-6 transition-colors duration-500 hover:bg-paper-elevated md:p-8"
               >
                 <p className="text-[0.62rem] uppercase tracking-[0.24em] text-muted tabular-nums">
@@ -126,9 +129,14 @@ export function Services() {
         </div>
 
         <Reveal delay={0.1} className="mt-10">
-          <Link href="/contact" className="btn-line">
-            {t("cta")} →
-          </Link>
+          <div className="flex flex-wrap items-center gap-6">
+            <Link href="/services" className="btn-line">
+              {t("allServices", { count: SERVICE_COUNT })} →
+            </Link>
+            <Link href="/contact" className="btn-ghost">
+              {t("cta")}
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>

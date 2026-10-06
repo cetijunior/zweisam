@@ -30,7 +30,8 @@ AGENTS.md is the Next.js boilerplate block. Project rules are below.
 ## 3. Layout
 
 ```
-src/app/[locale]/     public site (home, work, work/[slug] shoot pages, about, contact, impressum, datenschutz)
+src/app/[locale]/     public site (home, work, work/[slug], services, services/[slug], about, contact, impressum, datenschutz)
+src/lib/services.ts   service catalogue (DE/EN) — drives service pages, footer, JSON-LD, sitemap, llms.txt
 src/app/dashboard/    owner dashboard, gated by DASHBOARD_PASSWORD
 src/app/api/          dashboard writes / uploads
 src/components/       home work about contact layout brand motion theme dashboard

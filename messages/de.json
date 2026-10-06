@@ -11,7 +11,8 @@
     "imprint": "Impressum",
     "privacy": "Datenschutz",
     "whatsapp": "Auf WhatsApp schreiben",
-    "backToTop": "Nach oben"
+    "backToTop": "Nach oben",
+    "services": "Leistungen"
   },
   "home": {
     "cta": "Arbeit ansehen",
@@ -161,7 +162,25 @@
           "Druckfertige Dateien"
         ]
       }
-    }
+    },
+    "indexTitle": "Fotografie für jede Feier in Berlin",
+    "indexIntro": "Vom Heiratsantrag bis zum Kindergeburtstag – {count} Anlässe, die wir in allen Berliner Bezirken fotografieren. Wähle deinen, um Leistungen, typische Orte und Antworten auf häufige Fragen zu sehen.",
+    "metaIndex": "Fotograf für Feiern in Berlin: Paare, Gender Reveal, Geburtstage, Kindergeburtstage, Taufen, Henna-Abende und mehr.",
+    "allServices": "Alle {count} Leistungen",
+    "includes": "Das ist dabei",
+    "spots": "Beliebte Orte",
+    "faq": "Gut zu wissen",
+    "related": "Ähnliche Leistungen",
+    "areasTitle": "Wo wir fotografieren",
+    "areasBody": "Wir kommen in jeden Berliner Bezirk und ins Umland – innerhalb Berlins ohne Anfahrtskosten.",
+    "ctaTitle": "Ihr plant etwas?",
+    "ctaBody": "Schreibt uns auf WhatsApp mit Datum und Idee – wir antworten meist innerhalb von 24 Stunden.",
+    "ctaWhatsapp": "Auf WhatsApp anfragen",
+    "ctaForm": "Anfrage senden",
+    "home": "Start",
+    "work": "Unsere Arbeiten ansehen",
+    "photographer": "Fotograf in Berlin",
+    "waText": "Hallo {studio}! Ich interessiere mich für: {service}."
   },
   "process": {
     "eyebrow": "So läuft’s",

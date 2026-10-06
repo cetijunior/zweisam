@@ -22,11 +22,15 @@ export const PUBLIC_PATHS = [
   "/work",
   "/about",
   "/contact",
+  "/services",
   "/impressum",
   "/datenschutz",
 ] as const;
 
-export type PublicPath = (typeof PUBLIC_PATHS)[number] | `/work/${string}`;
+export type PublicPath =
+  | (typeof PUBLIC_PATHS)[number]
+  | `/work/${string}`
+  | `/services/${string}`;
 
 /** Canonical + hreflang alternates + OpenGraph for one localized public page. */
 export function pageMetadata({
@@ -37,6 +41,7 @@ export function pageMetadata({
   settings,
   image,
   noindex,
+  keywords,
 }: {
   locale: AppLocale;
   path: PublicPath;
@@ -45,6 +50,7 @@ export function pageMetadata({
   settings: SiteSettings;
   image?: { url: string; alt: string };
   noindex?: boolean;
+  keywords?: string[];
 }): Metadata {
   const languages = Object.fromEntries(
     routing.locales.map((l) => [l, `/${l}${path}`]),
@@ -52,6 +58,7 @@ export function pageMetadata({
   return {
     title,
     description,
+    keywords,
     alternates: {
       canonical: `/${locale}${path}`,
       languages: { ...languages, "x-default": `/${routing.defaultLocale}${path}` },

@@ -38,7 +38,7 @@ export default async function LocaleLayout({
         <main id="main" tabIndex={-1} className="min-h-screen outline-none">
           {children}
         </main>
-        <SiteFooter categories={data.categories} />
+        <SiteFooter />
         <FloatingActions />
       </BrandProvider>
     </NextIntlClientProvider>

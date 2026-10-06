@@ -11,7 +11,8 @@
     "imprint": "Imprint",
     "privacy": "Privacy",
     "whatsapp": "Chat on WhatsApp",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "services": "Services"
   },
   "home": {
     "cta": "View work",
@@ -161,7 +162,25 @@
           "Print-ready files"
         ]
       }
-    }
+    },
+    "indexTitle": "Photography for every celebration in Berlin",
+    "indexIntro": "From proposals to kids' parties – {count} occasions we photograph across all of Berlin's districts. Pick yours to see what's included, typical locations and answers to common questions.",
+    "metaIndex": "Celebration photographer in Berlin: couples, gender reveals, birthdays, kids' parties, christenings, henna nights and more.",
+    "allServices": "All {count} services",
+    "includes": "What's included",
+    "spots": "Popular spots",
+    "faq": "Good to know",
+    "related": "Related services",
+    "areasTitle": "Where we photograph",
+    "areasBody": "We travel to every Berlin district and the surrounding area – no travel fee within Berlin.",
+    "ctaTitle": "Planning something?",
+    "ctaBody": "Message us on WhatsApp with your date and idea – we usually reply within 24 hours.",
+    "ctaWhatsapp": "Ask on WhatsApp",
+    "ctaForm": "Send an inquiry",
+    "home": "Home",
+    "work": "See our work",
+    "photographer": "Photographer in Berlin",
+    "waText": "Hi {studio}! I'm interested in: {service}."
   },
   "process": {
     "eyebrow": "How it works",

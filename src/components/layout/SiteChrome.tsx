@@ -15,9 +15,19 @@ import { BrandMark } from "@/components/brand/BrandMark";
 import { useBrand } from "@/components/brand/BrandProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useMounted } from "@/lib/useMounted";
-import { getTagline, categoryName } from "@/lib/data/selectors";
+import { getTagline } from "@/lib/data/selectors";
+import { SERVICES, serviceName } from "@/lib/services";
 import { formatPhone } from "@/lib/contact";
-import type { Category } from "@/lib/data/types";
+
+/** Most-searched occasions, linked from every page footer. */
+const FOOTER_SERVICES = [
+  "paarshooting-berlin",
+  "gender-reveal-fotograf-berlin",
+  "kindergeburtstag-fotograf-berlin",
+  "geburtstag-fotograf-berlin",
+  "familienshooting-berlin",
+  "heiratsantrag-fotograf-berlin",
+].map((slug) => SERVICES.find((s) => s.slug === slug)!);
 
 const PAPER_RGB = {
   light: "246,245,243",
@@ -72,6 +82,7 @@ export function SiteHeader() {
     () => [
       { href: "/" as const, label: brand.studioName, home: true },
       { href: "/work" as const, label: t("work") },
+      { href: "/services" as const, label: t("services") },
       { href: "/about" as const, label: t("about") },
       { href: "/contact" as const, label: t("contact") },
     ],
@@ -303,14 +314,13 @@ export function SiteHeader() {
   );
 }
 
-export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
+export function SiteFooter() {
   const t = useTranslations("footer");
   const tn = useTranslations("nav");
   const brand = useBrand();
   const locale = useLocale() as "de" | "en";
   const year = new Date().getFullYear();
   const tagline = getTagline(brand, locale);
-  const sorted = [...categories].sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
     <footer className="border-t border-line">
@@ -361,16 +371,21 @@ export function SiteFooter({ categories = [] }: { categories?: Category[] }) {
                 {t("services")}
               </p>
               <ul className="space-y-3.5 text-sm">
-                {sorted.slice(0, 5).map((cat) => (
-                  <li key={cat.id}>
+                {FOOTER_SERVICES.map((svc) => (
+                  <li key={svc.slug}>
                     <Link
-                      href={`/work?c=${cat.slug}`}
+                      href={`/services/${svc.slug}`}
                       className="text-ink/80 hover:text-ink"
                     >
-                      {categoryName(cat, locale)}
+                      {serviceName(svc, locale)}
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link href="/services" className="text-ink hover:text-accent">
+                    {tn("services")} →
+                  </Link>
+                </li>
               </ul>
             </div>
 
