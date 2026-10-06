@@ -115,7 +115,7 @@ export function Hero({ cover }: { cover: MediaItem }) {
           >
             {brand.studioName}
             <span className="mx-2 text-white/35 sm:mx-3">/</span>
-            {brand.location}
+            {t("kicker")}
           </motion.p>
 
           <KineticWords

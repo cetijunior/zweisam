@@ -19,6 +19,7 @@ export function StudioJsonLd({
     "@id": `${siteUrl}/#business`,
     additionalType: "https://schema.org/Photographer",
     name: settings.studioName,
+    alternateName: [`${settings.studioName} Fotografie`, `${settings.studioName} Photography`, settings.handle].filter(Boolean),
     slogan: getTagline(settings, locale),
     logo: `${siteUrl}/icon.png`,
     priceRange: "€€",
@@ -63,11 +64,22 @@ export function StudioJsonLd({
     sameAs: [settings.instagram, settings.tiktok].filter(Boolean),
   };
 
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    name: settings.studioName,
+    alternateName: [`${settings.studioName} Fotografie`, "klickberlin.com"],
+    url: siteUrl,
+    inLanguage: ["de", "en"],
+    publisher: { "@id": `${siteUrl}/#business` },
+  };
+
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(json).replace(/</g, "\\u003c"),
+        __html: JSON.stringify([json, website]).replace(/</g, "\\u003c"),
       }}
     />
   );

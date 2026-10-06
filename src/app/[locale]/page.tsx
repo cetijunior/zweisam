@@ -15,7 +15,6 @@ import {
   getHeroImage,
   getPhotographersLine,
   getPublishedProjects,
-  getTagline,
 } from "@/lib/data/selectors";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
@@ -34,8 +33,14 @@ export async function generateMetadata({
   return pageMetadata({
     locale: loc,
     path: "",
-    title: `${settings.studioName} — ${settings.location}`,
-    description: getTagline(settings, loc),
+    title:
+      loc === "de"
+        ? `${settings.studioName} – Fotograf in Berlin für Paare, Gender Reveals & Feiern`
+        : `${settings.studioName} – Photographer in Berlin for couples, gender reveals & celebrations`,
+    description:
+      loc === "de"
+        ? `${settings.studioName}: Fotografen-Paar in Berlin für Paarshootings, Gender Reveals, Geburtstage, Kindergeburtstage, Taufen und Feiern. Natürlich, nah, ohne steifes Posieren – jetzt per WhatsApp anfragen.`
+        : `${settings.studioName}: a photographer couple in Berlin for couple shoots, gender reveals, birthdays, kids' parties, christenings and celebrations. Natural, close, never stiff – message us on WhatsApp.`,
     settings,
   });
 }
