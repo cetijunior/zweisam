@@ -48,8 +48,8 @@ export default async function DatenschutzPage({ params }: { params: Params }) {
       <h2>{de ? "2. Das Wichtigste in Kürze" : "2. The short version"}</h2>
       <p>
         {de
-          ? "Wir verwenden keine Analyse- oder Marketing-Tools und setzen auf der öffentlichen Website keine Cookies. Wir verarbeiten nur die Daten, die technisch zum Ausliefern der Seite nötig sind, und die Angaben, die ihr uns über das Anfrageformular oder per E-Mail schickt."
-          : "We use no analytics or marketing tools and set no cookies on the public website. We only process data technically required to deliver the site, and the details you send us through the inquiry form or by email."}
+          ? "Wir nutzen keine Werbe- oder Marketing-Tools. Google Analytics wird nur geladen, wenn ihr im Cookie-Banner zustimmt; ohne Zustimmung setzen wir keine Cookies. Ansonsten verarbeiten wir nur die Daten, die technisch zum Ausliefern der Seite nötig sind, und die Angaben, die ihr uns über das Anfrageformular oder per E-Mail schickt."
+          : "We use no advertising or marketing tools. Google Analytics only loads if you agree in the cookie banner; without consent we set no cookies. Otherwise we only process data technically required to deliver the site, and the details you send us through the inquiry form or by email."}
       </p>
 
       <h2>{de ? "3. Hosting und Server-Logfiles" : "3. Hosting and server log files"}</h2>
@@ -99,7 +99,19 @@ export default async function DatenschutzPage({ params }: { params: Params }) {
           : "We link to our profiles (e.g. Instagram, TikTok) and offer a WhatsApp link. These are plain links — no data is transferred until you click them. Then the privacy policy of the respective provider applies (Meta Platforms Ireland Ltd. or TikTok Technology Ltd.)."}
       </p>
 
-      <h2>{de ? "7. Eure Rechte" : "7. Your rights"}</h2>
+      <h2>{de ? "7. Webanalyse mit Google Analytics" : "7. Web analytics with Google Analytics"}</h2>
+      <p>
+        {de
+          ? "Nur mit eurer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG) nutzen wir Google Analytics 4 der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Dabei werden Cookies gesetzt und Nutzungsdaten (z. B. aufgerufene Seiten, Verweildauer, Gerätetyp, ungefährer Standort) pseudonymisiert ausgewertet; IP-Adressen werden gekürzt. Eine Übermittlung in die USA ist möglich und erfolgt auf Grundlage des EU-US Data Privacy Framework. Die Daten werden nach 14 Monaten gelöscht."
+          : "Only with your consent (Art. 6(1)(a) GDPR, § 25(1) TDDDG) we use Google Analytics 4 by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. It sets cookies and evaluates usage data (e.g. pages viewed, time on page, device type, approximate location) in pseudonymised form; IP addresses are truncated. Data may be transferred to the USA on the basis of the EU-US Data Privacy Framework. Data is deleted after 14 months."}
+      </p>
+      <p>
+        {de
+          ? "Ihr könnt eure Einwilligung jederzeit über „Cookie-Einstellungen“ im Seitenfuß widerrufen."
+          : "You can withdraw your consent at any time via “Cookie settings” in the footer."}
+      </p>
+
+      <h2>{de ? "8. Eure Rechte" : "8. Your rights"}</h2>
       <p>
         {de
           ? "Ihr habt jederzeit das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Eine erteilte Einwilligung könnt ihr jederzeit mit Wirkung für die Zukunft widerrufen. Schreibt uns dazu einfach eine E-Mail."
@@ -111,7 +123,7 @@ export default async function DatenschutzPage({ params }: { params: Params }) {
           : "You also have the right to lodge a complaint with a data protection authority, e.g. the Berlin Commissioner for Data Protection and Freedom of Information, Alt-Moabit 59–61, 10555 Berlin."}
       </p>
 
-      <h2>{de ? "8. Fotos von euch" : "8. Photos of you"}</h2>
+      <h2>{de ? "9. Fotos von euch" : "9. Photos of you"}</h2>
       <p>
         {de
           ? "Fotos aus Shootings veröffentlichen wir auf dieser Website oder in sozialen Netzwerken nur mit eurer ausdrücklichen Einwilligung. Ihr könnt diese jederzeit widerrufen — wir entfernen die Bilder dann."

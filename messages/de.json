@@ -259,5 +259,13 @@
     "title": "Da ist etwas schiefgelaufen.",
     "body": "Bitte versucht es noch einmal — oder meldet euch direkt bei uns.",
     "retry": "Erneut versuchen"
+  },
+  "consent": {
+    "title": "Cookies & Statistik",
+    "body": "Mit deiner Einwilligung nutzen wir Google Analytics, um zu verstehen, wie Besucher die Seite nutzen. Keine Werbung, kein Tracking ohne dein OK – du kannst das jederzeit ändern.",
+    "more": "Datenschutz",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen",
+    "settings": "Cookie-Einstellungen"
   }
 }

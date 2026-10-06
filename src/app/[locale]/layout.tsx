@@ -1,6 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@/components/consent/Analytics";
 import { BrandProvider } from "@/components/brand/BrandProvider";
 import {
   FloatingActions,
@@ -40,6 +41,7 @@ export default async function LocaleLayout({
         </main>
         <SiteFooter />
         <FloatingActions />
+        <Analytics />
       </BrandProvider>
     </NextIntlClientProvider>
   );

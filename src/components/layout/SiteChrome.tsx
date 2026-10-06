@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useBrand } from "@/components/brand/BrandProvider";
+import { ConsentLink } from "@/components/consent/Analytics";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useMounted } from "@/lib/useMounted";
 import { getTagline } from "@/lib/data/selectors";
@@ -317,6 +318,7 @@ export function SiteHeader() {
 export function SiteFooter() {
   const t = useTranslations("footer");
   const tn = useTranslations("nav");
+  const tc = useTranslations("consent");
   const brand = useBrand();
   const locale = useLocale() as "de" | "en";
   const year = new Date().getFullYear();
@@ -455,6 +457,7 @@ export function SiteFooter() {
             <Link href="/datenschutz" className="hover:text-ink">
               {tn("privacy")}
             </Link>
+            <ConsentLink className="hover:text-ink" label={tc("settings")} />
             <span>
               {t("studio")} · {brand.location}
             </span>

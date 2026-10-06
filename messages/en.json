@@ -259,5 +259,13 @@
     "title": "Something went wrong.",
     "body": "Please try again — or get in touch directly.",
     "retry": "Try again"
+  },
+  "consent": {
+    "title": "Cookies & statistics",
+    "body": "With your consent we use Google Analytics to understand how visitors use this site. No ads, no tracking without your OK – you can change this any time.",
+    "more": "Privacy policy",
+    "accept": "Accept",
+    "decline": "Decline",
+    "settings": "Cookie settings"
   }
 }
