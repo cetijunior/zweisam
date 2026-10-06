@@ -52,4 +52,4 @@ Open **Dashboard → Brand** and change **Studio name**. It flows through nav, h
 
 ## Image credit
 
-Placeholder photos from [Unsplash](https://unsplash.com) for development only. Hero film: [Couple walking hand in hand](https://mixkit.co/free-stock-video/couple-walking-hand-in-hand-4661/) (Mixkit).
+Placeholder photos (Berlin locations) from [Unsplash](https://unsplash.com), free licence, until the studio uploads its own shoots. Hero film: [Couple walking hand in hand](https://mixkit.co/free-stock-video/couple-walking-hand-in-hand-4661/) (Mixkit).
