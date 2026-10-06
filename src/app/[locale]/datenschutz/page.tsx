@@ -59,6 +59,12 @@ export default async function DatenschutzPage({ params }: { params: Params }) {
           : "This website is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA. When you visit, technical data is processed automatically (e.g. IP address, date and time, page requested, browser and operating system) to deliver the site securely and reliably. The legal basis is Art. 6(1)(f) GDPR (legitimate interest in secure operation). A data processing agreement is in place with Vercel; transfers to the USA are based on the EU-US Data Privacy Framework or standard contractual clauses."}
       </p>
 
+      <p>
+        {de
+          ? "Zusätzlich nutzen wir Vercel Web Analytics für eine anonyme Reichweitenmessung (z. B. aufgerufene Seiten, Herkunftsseite, Gerätetyp). Dabei werden keine Cookies gesetzt und keine personenbezogenen Profile gebildet; Besucher werden nur über einen täglich wechselnden, nicht rückverfolgbaren Hash gezählt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO."
+          : "We also use Vercel Web Analytics for anonymous audience measurement (e.g. pages viewed, referrer, device type). It sets no cookies and builds no personal profiles; visitors are only counted via a daily-rotating, non-traceable hash. The legal basis is Art. 6(1)(f) GDPR."}
+      </p>
+
       <h2>{de ? "4. Anfrageformular und E-Mail" : "4. Inquiry form and email"}</h2>
       <p>
         {de

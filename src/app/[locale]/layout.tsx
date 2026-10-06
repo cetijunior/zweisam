@@ -1,6 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { Analytics } from "@/components/consent/Analytics";
 import { BrandProvider } from "@/components/brand/BrandProvider";
 import {
@@ -42,6 +43,7 @@ export default async function LocaleLayout({
         <SiteFooter />
         <FloatingActions />
         <Analytics />
+        <VercelAnalytics />
       </BrandProvider>
     </NextIntlClientProvider>
   );
