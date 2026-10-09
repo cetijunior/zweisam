@@ -203,6 +203,25 @@
         "title": "Eure Galerie",
         "text": "Eine kuratierte, bearbeitete Online-Galerie zum Herunterladen, Teilen und Drucken — in etwa zwei Wochen."
       }
+    },
+    "demo": {
+      "online": "online",
+      "msg1": "Hi! Wir planen ein Gender Reveal am 14. Juni im Treptower Park 🎈",
+      "msg2": "Wie schön! Der Tag ist noch frei. Nachmittags oder zur goldenen Stunde?",
+      "msg3": "Goldene Stunde klingt perfekt ✨",
+      "planTitle": "Euer Shooting-Plan",
+      "planDate": "Datum",
+      "planDateValue": "Sa, 14. Juni",
+      "planPlace": "Ort",
+      "planPlaceValue": "Treptower Park",
+      "planLight": "Licht",
+      "planLightValue": "Goldene Stunde · 20:40",
+      "planWho": "Wer",
+      "planWhoValue": "Paar + 12 Gäste",
+      "mood": "Moodboard",
+      "galleryTitle": "Anna & Jonas – Reveal",
+      "download": "Alle laden",
+      "galleryMeta": "148 bearbeitete Fotos · geliefert in 12 Tagen"
     }
   },
   "faq": {
@@ -268,5 +287,88 @@
     "accept": "Akzeptieren",
     "decline": "Ablehnen",
     "settings": "Cookie-Einstellungen"
+  },
+  "finder": {
+    "eyebrow": "Shooting-Finder",
+    "title": "Welches Shooting passt zu euch?",
+    "intro": "Drei kurze Klicks und wir zeigen euch das passende Shooting – inklusive fertig formulierter WhatsApp-Nachricht.",
+    "back": "Zurück",
+    "restart": "Neu starten",
+    "resultEyebrow": "Unser Vorschlag",
+    "alsoFits": "Passt auch",
+    "details": "Was enthalten ist",
+    "whatsapp": "Per WhatsApp anfragen",
+    "waText": "Hallo {studio}! Der Shooting-Finder hat vorgeschlagen: {service}. ({answers}) Habt ihr einen Termin frei?",
+    "occasion": {
+      "q": "Was feiert ihr?",
+      "options": {
+        "love": "Liebe – wir zwei",
+        "baby": "Ein Baby ist unterwegs oder da",
+        "party": "Eine Party",
+        "milestone": "Ein Meilenstein oder eine Zeremonie",
+        "justUs": "Kein Anlass, einfach Fotos"
+      }
+    },
+    "who": {
+      "q": "Wer steht vor der Kamera?",
+      "options": {
+        "two": "Nur wir zwei",
+        "family": "Familie & Kinder",
+        "friends": "Eine Freundesgruppe",
+        "crowd": "Viele Gäste"
+      }
+    },
+    "mood": {
+      "q": "Wie soll es sich anfühlen?",
+      "options": {
+        "golden": "Ruhig, warm, goldenes Licht",
+        "playful": "Verspielt und ein bisschen wild",
+        "evening": "Elegante Abendstimmung",
+        "secret": "Eine Überraschung – keiner weiß davon"
+      }
+    }
+  },
+  "golden": {
+    "eyebrow": "Goldene Stunde in Berlin",
+    "now": "Jetzt goldene Stunde – noch {time}",
+    "next": "Nächste goldene Stunde in {time}",
+    "morning": "Morgens",
+    "evening": "Abends",
+    "nowLabel": "Jetzt",
+    "loading": "Wir schauen nach der Sonne…",
+    "note": "Live für Berlin berechnet. Die meisten Outdoor-Shootings planen wir um dieses Licht herum."
+  },
+  "craft": {
+    "eyebrow": "So arbeiten wir",
+    "title": "Gutes Licht, echte Momente, sorgfältige Bearbeitung",
+    "raw": "Direkt aus der Kamera",
+    "edit": "Unsere Bearbeitung",
+    "sliderLabel": "Ziehen, um unbearbeitetes und bearbeitetes Foto zu vergleichen",
+    "editBody": "Zieh die Linie: Jedes Bild wird von Hand bearbeitet – warme, natürliche Hauttöne, nichts Künstliches.",
+    "lightBody": "Outdoor-Shootings planen wir um die goldene Stunde, wenn Berlins Licht am weichsten ist. Hier seht ihr, wann sie das nächste Mal ist."
+  },
+  "card": {
+    "eyebrow": "In Kontakt bleiben",
+    "title": "Unsere Karte, für eure Tasche",
+    "body": "Dieselbe Karte, die wir bei jedem Shooting verteilen. Speichert uns mit einem Tipp in euren Kontakten – für den nächsten Geburtstag, Reveal oder Antrag.",
+    "save": "Kontakt speichern",
+    "whatsapp": "Per WhatsApp schreiben",
+    "waText": "Hallo {studio}! Ich habe eure Karte auf der Website gesehen.",
+    "hint": "Karte antippen zum Umdrehen",
+    "showBack": "Rückseite der Karte zeigen",
+    "showFront": "Vorderseite der Karte zeigen",
+    "altFront": "Visitenkarte von {studio} mit Berliner Skyline",
+    "altBack": "Rückseite der Visitenkarte mit QR-Code und Kontaktdaten"
+  },
+  "menu": {
+    "discover": "Ausprobieren",
+    "finderEyebrow": "Shooting-Finder",
+    "finderTitle": "Welches Shooting passt zu euch?",
+    "goldenEyebrow": "Goldene Stunde",
+    "goldenTitle": "Berlins schönstes Licht",
+    "cardEyebrow": "Unsere Karte",
+    "cardTitle": "Speichert uns in euren Kontakten",
+    "contact": "Kontakt",
+    "waText": "Hallo {studio}! Ich habe eine Frage."
   }
 }

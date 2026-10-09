@@ -160,6 +160,8 @@ body {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 0.25rem;
+  /* Rails use px-5; without this, snapping pulls the first card flush to the screen edge. */
+  scroll-padding-inline: 1.25rem;
 }
 
 .h-scroll::-webkit-scrollbar {

@@ -16,7 +16,6 @@ const SERVICE_CARDS = [
   { key: "party", slug: "kindergeburtstag-fotograf-berlin" },
   { key: "gathering", slug: "dinnerparty-fotograf-berlin" },
 ] as const;
-const STEP_KEYS = ["s1", "s2", "s3", "s4"] as const;
 
 /** Endless ribbon of what the studio photographs */
 export function Marquee() {
@@ -73,20 +72,11 @@ function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
 export function Services() {
   const t = useTranslations("services");
   return (
-    <section className="border-t border-line py-16 md:py-28">
+    <section className="pb-12 md:pb-20">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="grid gap-6 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-7">
-            <SectionHead eyebrow={t("eyebrow")} title={t("title")} />
-          </div>
-          <Reveal delay={0.08} className="md:col-span-4 md:col-start-9">
-            <p className="text-base leading-relaxed text-ink-soft">{t("intro")}</p>
-          </Reveal>
-        </div>
-
-        <div className="mt-12 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4 md:mt-16">
+        <div className="h-scroll -mx-5 gap-3 px-5 sm:mx-0 sm:grid sm:gap-px sm:overflow-hidden sm:border sm:border-line sm:bg-line sm:px-0 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICE_CARDS.map(({ key, slug }, i) => (
-            <Reveal key={key} delay={i * 0.06} className="bg-paper">
+            <Reveal key={key} delay={i * 0.06} className="w-[78vw] max-w-[320px] shrink-0 border border-line bg-paper sm:w-auto sm:max-w-none sm:border-0">
               <Link
                 href={`/services/${slug}`}
                 className="group relative flex h-full flex-col p-6 transition-colors duration-500 hover:bg-paper-elevated md:p-8"
@@ -128,7 +118,7 @@ export function Services() {
           ))}
         </div>
 
-        <Reveal delay={0.1} className="mt-10">
+        <Reveal delay={0.1} className="mt-6 md:mt-10">
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/services" className="btn-line">
               {t("allServices", { count: SERVICE_COUNT })} →
@@ -143,39 +133,11 @@ export function Services() {
   );
 }
 
-export function Process() {
-  const t = useTranslations("process");
-  return (
-    <section className="border-t border-line bg-paper-elevated py-16 md:py-28">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <SectionHead eyebrow={t("eyebrow")} title={t("title")} />
-        <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 md:mt-16">
-          {STEP_KEYS.map((key, i) => (
-            <Reveal key={key} delay={i * 0.08}>
-              <li className="relative list-none">
-                <span className="font-[family-name:var(--font-instrument)] text-6xl italic leading-none text-accent md:text-7xl">
-                  {i + 1}
-                </span>
-                <h3 className="mt-5 font-[family-name:var(--font-syne)] text-lg font-medium tracking-tight">
-                  {t(`steps.${key}.title`)}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                  {t(`steps.${key}.text`)}
-                </p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
 export function Faq() {
   const t = useTranslations("faq");
   const [open, setOpen] = useState<string | null>("q1");
   return (
-    <section className="border-t border-line py-16 md:py-28">
+    <section className="border-t border-line py-12 md:py-20">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-12 md:px-8">
         <div className="md:col-span-4">
           <SectionHead eyebrow={t("eyebrow")} title={t("title")} />

@@ -23,7 +23,7 @@ export function ServiceCta({
 }) {
   return (
     <section className="border-t border-line bg-paper-elevated">
-      <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-20">
         <Reveal>
           <h2 className="max-w-2xl font-[family-name:var(--font-syne)] text-[clamp(1.8rem,4vw,3rem)] font-medium leading-tight tracking-tight">
             {title}
@@ -54,7 +54,7 @@ export function ServiceCta({
 export function AreasBlock({ title, body, prefix }: { title: string; body: string; prefix: string }) {
   return (
     <section className="border-t border-line">
-      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 md:grid-cols-12 md:px-8 md:py-20">
+      <div className="mx-auto grid max-w-7xl gap-6 px-5 py-10 md:grid-cols-12 md:px-8 md:py-16">
         <div className="md:col-span-4">
           <h2 className="font-[family-name:var(--font-syne)] text-2xl font-medium tracking-tight">{title}</h2>
           <p className="mt-3 text-sm leading-relaxed text-ink-soft">{body}</p>
@@ -87,11 +87,11 @@ export function ServiceCard({
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col border border-line bg-paper p-6 transition-colors duration-500 hover:bg-paper-elevated"
+      className="group flex h-full items-center justify-between gap-4 border border-line bg-paper px-5 py-4 transition-colors duration-500 hover:bg-paper-elevated sm:flex-col sm:items-start sm:justify-start sm:p-6"
     >
-      <h3 className="font-[family-name:var(--font-syne)] text-lg font-medium tracking-tight">{name}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-ink-soft">{short}</p>
-      <span aria-hidden className="mt-auto pt-6 text-ink transition-transform duration-500 group-hover:translate-x-1">
+      <h3 className="font-[family-name:var(--font-syne)] text-base font-medium tracking-tight sm:text-lg">{name}</h3>
+      <p className="mt-2 hidden text-sm leading-relaxed text-ink-soft sm:block">{short}</p>
+      <span aria-hidden className="text-ink transition-transform duration-500 group-hover:translate-x-1 sm:mt-auto sm:pt-6">
         →
       </span>
     </Link>

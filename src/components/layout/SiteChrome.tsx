@@ -12,6 +12,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { MobileMenu } from "@/components/layout/MobileMenu";
 import { useBrand } from "@/components/brand/BrandProvider";
 import { ConsentLink } from "@/components/consent/Analytics";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
@@ -249,66 +250,10 @@ export function SiteHeader() {
 
       <AnimatePresence>
         {open ? (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-[55] flex flex-col bg-paper text-ink md:hidden"
-            style={{ paddingTop: "calc(4.5rem + var(--safe-top))" }}
-          >
-            <nav className="flex flex-1 flex-col justify-center px-6 pb-10">
-              {links
-                .filter((l) => !("home" in l && l.home))
-                .map((link, i) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 12 }}
-                    transition={{
-                      delay: 0.08 + i * 0.07,
-                      duration: 0.55,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="block border-b border-line py-5 font-[family-name:var(--font-syne)] text-3xl font-medium tracking-tight"
-                    >
-                      <span className="mr-4 text-[0.65rem] uppercase tracking-[0.2em] text-muted">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-            </nav>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35 }}
-              className="flex items-center justify-between gap-4 border-t border-line px-6 py-6"
-              style={{ paddingBottom: "calc(1.5rem + var(--safe-bottom))" }}
-            >
-              <div className="flex items-center gap-3">
-                <ThemeToggle />
-                <p className="text-[0.7rem] uppercase tracking-[0.18em] text-muted">
-                  {brand.location}
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                className="btn-line"
-              >
-                {t("inquire")}
-              </Link>
-            </motion.div>
-          </motion.div>
+          <MobileMenu
+            links={links.filter((l): l is (typeof links)[number] & { href: "/work" | "/services" | "/about" | "/contact" } => !("home" in l && l.home))}
+            onClose={() => setOpen(false)}
+          />
         ) : null}
       </AnimatePresence>
     </>

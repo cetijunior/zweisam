@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Reveal } from "@/components/motion/primitives";
+import { ShootFinder } from "@/components/features/ShootFinder";
 import { AreasBlock, ServiceCard, ServiceCta } from "@/components/services/ServiceBits";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/StudioJsonLd";
 import type { AppLocale } from "@/i18n/routing";
@@ -53,7 +54,7 @@ export default async function ServicesPage({ params }: { params: Params }) {
           })),
         }}
       />
-      <section className="mx-auto max-w-7xl px-5 pb-10 pt-32 md:px-8 md:pt-40">
+      <section className="mx-auto max-w-7xl px-5 pb-6 pt-24 md:px-8 md:pt-36">
         <Reveal>
           <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted">{t("eyebrow")}</p>
           <h1 className="mt-5 max-w-4xl font-[family-name:var(--font-syne)] text-[clamp(2.2rem,6vw,4.5rem)] font-medium leading-[1.04] tracking-[-0.03em]">
@@ -65,8 +66,10 @@ export default async function ServicesPage({ params }: { params: Params }) {
         </Reveal>
       </section>
 
+      <ShootFinder />
+
       {groups.map((g) => (
-        <section key={g} className="mx-auto max-w-7xl px-5 py-10 md:px-8">
+        <section key={g} className="mx-auto max-w-7xl px-5 py-6 md:px-8 md:py-10">
           <h2 className="mb-5 text-[0.7rem] uppercase tracking-[0.24em] text-muted">
             {SERVICE_GROUPS[g][loc]}
           </h2>

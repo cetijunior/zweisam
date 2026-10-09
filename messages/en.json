@@ -203,6 +203,25 @@
         "title": "Your gallery",
         "text": "A curated, edited online gallery to download, share and print — delivered within about two weeks."
       }
+    },
+    "demo": {
+      "online": "online",
+      "msg1": "Hi! We're planning a gender reveal on 14 June in Treptower Park 🎈",
+      "msg2": "How lovely! We're free that day. Afternoon or golden hour?",
+      "msg3": "Golden hour sounds perfect ✨",
+      "planTitle": "Your shoot plan",
+      "planDate": "Date",
+      "planDateValue": "Sat, 14 June",
+      "planPlace": "Place",
+      "planPlaceValue": "Treptower Park",
+      "planLight": "Light",
+      "planLightValue": "Golden hour · 20:40",
+      "planWho": "Who",
+      "planWhoValue": "Couple + 12 guests",
+      "mood": "Moodboard",
+      "galleryTitle": "Anna & Jonas – Reveal",
+      "download": "Download all",
+      "galleryMeta": "148 edited photos · delivered in 12 days"
     }
   },
   "faq": {
@@ -268,5 +287,88 @@
     "accept": "Accept",
     "decline": "Decline",
     "settings": "Cookie settings"
+  },
+  "finder": {
+    "eyebrow": "Shoot finder",
+    "title": "Which shoot fits you?",
+    "intro": "Three quick taps and we'll point you to the session that fits your occasion – with a WhatsApp message already written for you.",
+    "back": "Back",
+    "restart": "Start over",
+    "resultEyebrow": "Our suggestion",
+    "alsoFits": "Also a good fit",
+    "details": "See what's included",
+    "whatsapp": "Ask about this on WhatsApp",
+    "waText": "Hi {studio}! The shoot finder suggested: {service}. ({answers}) Do you have a date free?",
+    "occasion": {
+      "q": "What are you celebrating?",
+      "options": {
+        "love": "Love – the two of us",
+        "baby": "A baby on the way or a new one",
+        "party": "A party",
+        "milestone": "A milestone or ceremony",
+        "justUs": "No reason, just photos"
+      }
+    },
+    "who": {
+      "q": "Who'll be in front of the camera?",
+      "options": {
+        "two": "Just two of us",
+        "family": "Family & kids",
+        "friends": "A group of friends",
+        "crowd": "Lots of guests"
+      }
+    },
+    "mood": {
+      "q": "What should it feel like?",
+      "options": {
+        "golden": "Calm, warm, golden light",
+        "playful": "Playful and a bit wild",
+        "evening": "Elegant evening atmosphere",
+        "secret": "A surprise – nobody knows"
+      }
+    }
+  },
+  "golden": {
+    "eyebrow": "Golden hour in Berlin",
+    "now": "Golden hour now – {time} left",
+    "next": "Next golden hour in {time}",
+    "morning": "Morning",
+    "evening": "Evening",
+    "nowLabel": "Now",
+    "loading": "Checking the sun…",
+    "note": "Calculated live for Berlin. Most of our outdoor sessions are timed around this light."
+  },
+  "craft": {
+    "eyebrow": "How we work",
+    "title": "Good light, honest moments, a careful edit",
+    "raw": "Straight from camera",
+    "edit": "Our edit",
+    "sliderLabel": "Drag to compare the unedited and edited photo",
+    "editBody": "Drag the line: every image is edited by hand – warm, natural skin tones, nothing plastic.",
+    "lightBody": "We plan outdoor shoots around golden hour, when Berlin's light is softest. Here's when it happens next."
+  },
+  "card": {
+    "eyebrow": "Keep in touch",
+    "title": "Our card, in your pocket",
+    "body": "The same card we hand out at every shoot. Save us to your contacts in one tap – for the next birthday, reveal or proposal.",
+    "save": "Save contact",
+    "whatsapp": "Message us on WhatsApp",
+    "waText": "Hi {studio}! I found your card on the website.",
+    "hint": "Tap the card to flip it",
+    "showBack": "Show the back of the card",
+    "showFront": "Show the front of the card",
+    "altFront": "{studio} business card front with the Berlin skyline",
+    "altBack": "Business card back with QR code and contact details"
+  },
+  "menu": {
+    "discover": "Try it",
+    "finderEyebrow": "Shoot finder",
+    "finderTitle": "Which shoot fits you?",
+    "goldenEyebrow": "Golden hour",
+    "goldenTitle": "Berlin's best light",
+    "cardEyebrow": "Our card",
+    "cardTitle": "Save us to your contacts",
+    "contact": "Get in touch",
+    "waText": "Hi {studio}! I have a question."
   }
 }

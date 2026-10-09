@@ -51,11 +51,11 @@ export function WorkFragments({ data }: { data: SiteData }) {
 
   const preview = images.slice(
     0,
-    active === "all" ? (mobile ? 8 : 12) : mobile ? 6 : 9,
+    active === "all" ? (mobile ? 6 : 12) : mobile ? 4 : 9,
   );
 
   return (
-    <section className="border-t border-line py-16 md:py-32">
+    <section className="border-t border-line py-12 md:py-24">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
@@ -95,7 +95,7 @@ export function WorkFragments({ data }: { data: SiteData }) {
           </div>
         </div>
 
-        <div className="mt-6 columns-1 gap-3 sm:mt-10 sm:columns-2 sm:gap-4 lg:columns-3">
+        <div className="mt-5 columns-2 gap-2 sm:mt-10 sm:gap-4 lg:columns-3">
           <AnimatePresence mode="popLayout">
             {preview.map(({ media, project }, i) => (
               <motion.div
@@ -109,7 +109,7 @@ export function WorkFragments({ data }: { data: SiteData }) {
                   delay: (i % 6) * 0.04,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mb-3 break-inside-avoid sm:mb-4"
+                className="mb-2 break-inside-avoid sm:mb-4"
               >
                 <ImageReveal delay={(i % 4) * 0.03}>
                   <Link
@@ -126,7 +126,7 @@ export function WorkFragments({ data }: { data: SiteData }) {
                       width={media.width}
                       height={media.height}
                       className="h-auto w-full bg-line object-cover transition duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] group-active:scale-[1.03]"
-                      sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                      sizes="(max-width:1024px) 50vw, 33vw"
                     />
                     <div className="caption-touch pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent p-3 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:translate-y-1 sm:p-4">
                       <p className="font-[family-name:var(--font-syne)] text-sm font-medium text-white">
@@ -164,7 +164,7 @@ export function CategoryChapters({
   });
 
   return (
-    <section className="py-16 md:px-8 md:py-28">
+    <section className="pb-4 pt-10 md:px-8 md:pb-6 md:pt-20">
       <div className="mx-auto max-w-7xl">
         <div className="px-5 md:px-0">
           <Reveal>

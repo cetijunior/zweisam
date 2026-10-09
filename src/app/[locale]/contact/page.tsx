@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { BusinessCard } from "@/components/features/BusinessCard";
 import { readSiteData } from "@/lib/data/store";
 
 export async function generateMetadata({
@@ -39,10 +40,13 @@ export default async function ContactPage({
     data.media.find((m) => m.id === "media-1") ?? data.media[0];
 
   return (
-    <ContactForm
-      sideImageUrl={side.url}
-      sideImageAlt={loc === "de" ? side.altDe : side.altEn}
-      initialType={type}
-    />
+    <>
+      <ContactForm
+        sideImageUrl={side.url}
+        sideImageAlt={loc === "de" ? side.altDe : side.altEn}
+        initialType={type}
+      />
+      <BusinessCard />
+    </>
   );
 }

@@ -57,7 +57,7 @@ export function WorkGallery({
   }));
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-36">
+    <div className="mx-auto max-w-7xl px-5 pb-12 pt-24 md:px-8 md:py-36">
       <Reveal>
         <ScrollWords
           as="h1"
@@ -103,7 +103,7 @@ export function WorkGallery({
       {images.length === 0 ? (
         <p className="mt-16 text-muted">{t("empty")}</p>
       ) : (
-        <div className="mt-6 columns-1 gap-3 sm:mt-10 sm:columns-2 sm:gap-5 lg:columns-3">
+        <div className="mt-5 columns-2 gap-2 sm:mt-10 sm:gap-5 lg:columns-3">
           <AnimatePresence mode="popLayout">
             {images.map(({ media, project }, i) => (
               <motion.div
@@ -117,7 +117,7 @@ export function WorkGallery({
                   delay: (i % 6) * 0.04,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mb-3 break-inside-avoid sm:mb-5"
+                className="mb-2 break-inside-avoid sm:mb-5"
               >
                 <ImageReveal delay={(i % 5) * 0.03}>
                   <button
@@ -131,7 +131,7 @@ export function WorkGallery({
                       width={media.width}
                       height={media.height}
                       className="h-auto w-full object-cover transition duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-active:scale-[1.04]"
-                      sizes="(max-width:768px) 100vw, 33vw"
+                      sizes="(max-width:1024px) 50vw, 33vw"
                     />
                     <div className="caption-touch pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent p-3 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:translate-y-2 sm:p-4">
                       <p className="font-[family-name:var(--font-syne)] text-sm font-medium text-white">

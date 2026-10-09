@@ -3,8 +3,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AboutTeaser } from "@/components/about/AboutContent";
 import { InquireTeaser } from "@/components/contact/ContactForm";
 import { Hero, MomentsRail } from "@/components/home/HomeSections";
-import { Faq, Marquee, Process, Services } from "@/components/home/InfoSections";
+import { Faq, Marquee, Services } from "@/components/home/InfoSections";
 import { FAQ_KEYS } from "@/lib/faq";
+import { BusinessCard } from "@/components/features/BusinessCard";
+import { CraftSection } from "@/components/features/CraftSection";
+import { ProcessShowcase } from "@/components/features/ProcessShowcase";
+import { ShootFinder } from "@/components/features/ShootFinder";
 import {
   CategoryChapters,
   WorkFragments,
@@ -67,6 +71,11 @@ export default async function HomePage({
     data.media.find((m) => m.id === "media-10") ?? data.media[0];
   const inquireImage =
     data.media.find((m) => m.id === "media-4") ?? data.media[2] ?? hero;
+  const processImages = ["media-1", "media-21", "media-10", "media-4", "media-5", "media-22"]
+    .map((id) => data.media.find((m) => m.id === id)?.url)
+    .filter((u): u is string => Boolean(u));
+  const craftImage =
+    data.media.find((m) => m.id === "media-7") ?? data.media[1] ?? hero;
 
   return (
     <>
@@ -77,6 +86,7 @@ export default async function HomePage({
       <WorkFragments data={data} />
       <CategoryChapters data={data} categories={data.categories} />
       <Services />
+      <ShootFinder />
       <AboutTeaser
         title={tAbout("title")}
         headline={getAboutHeadline(data.settings, loc)}
@@ -87,9 +97,14 @@ export default async function HomePage({
         imageAlt={loc === "de" ? aboutImage.altDe : aboutImage.altEn}
         cta={tHome("aboutCta")}
       />
-      <Process />
+      <ProcessShowcase images={processImages} />
+      <CraftSection
+        imageUrl={craftImage.url}
+        imageAlt={loc === "de" ? craftImage.altDe : craftImage.altEn}
+      />
       <MomentsRail data={data} projects={projects} />
       <Faq />
+      <BusinessCard />
       <InquireTeaser
         imageUrl={inquireImage.url}
         imageAlt={loc === "de" ? inquireImage.altDe : inquireImage.altEn}

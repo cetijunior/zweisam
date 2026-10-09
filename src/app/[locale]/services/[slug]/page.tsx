@@ -3,6 +3,8 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ImageReveal, Reveal } from "@/components/motion/primitives";
+import { EditCompare } from "@/components/features/EditCompare";
+import { GoldenHour } from "@/components/features/GoldenHour";
 import { AreasBlock, ServiceCard, ServiceCta } from "@/components/services/ServiceBits";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/StudioJsonLd";
 import { Link } from "@/i18n/navigation";
@@ -105,7 +107,7 @@ export default async function ServicePage({ params }: { params: Params }) {
         ])}
       />
 
-      <section className="mx-auto max-w-7xl px-5 pb-12 pt-32 md:px-8 md:pt-40">
+      <section className="mx-auto max-w-7xl px-5 pb-8 pt-24 md:px-8 md:pt-36">
         <Reveal>
           <nav aria-label="Breadcrumb" className="text-[0.68rem] uppercase tracking-[0.22em] text-muted">
             <Link href="/" className="hover:text-ink">{t("home")}</Link>
@@ -138,7 +140,7 @@ export default async function ServicePage({ params }: { params: Params }) {
         </Reveal>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-12 md:grid-cols-12 md:px-8">
+      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-8 md:grid-cols-12 md:px-8">
         <Reveal className="md:col-span-7">
           <p className="text-base leading-relaxed text-ink-soft md:text-lg">{de ? svc.bodyDe : svc.bodyEn}</p>
           <h2 className="mt-10 font-[family-name:var(--font-syne)] text-xl font-medium">{t("faq")}</h2>
@@ -163,13 +165,17 @@ export default async function ServicePage({ params }: { params: Params }) {
             <h2 className="text-[0.7rem] uppercase tracking-[0.24em] text-muted">{t("spots")}</h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-soft">{svc.spots.join(" · ")}</p>
           </div>
+          <GoldenHour compact />
         </Reveal>
       </section>
 
       {photos.length ? (
         <section className="mx-auto max-w-7xl px-5 py-10 md:px-8">
+          <Reveal className="mb-4 md:mb-6">
+            <EditCompare src={photos[0].url} alt={`${mediaAlt(photos[0], loc)} – ${title}`} />
+          </Reveal>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-            {photos.map((m, i) => (
+            {photos.slice(1).map((m, i) => (
               <ImageReveal key={m.id} delay={(i % 3) * 0.05}>
                 <div className="relative aspect-[4/5] bg-line">
                   <Image
