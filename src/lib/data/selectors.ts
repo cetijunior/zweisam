@@ -1,4 +1,5 @@
 import { createDefaultData } from "./defaults";
+import { SERVICES, type Service } from "@/lib/services";
 import type { Locale, MediaItem, Project, SiteData } from "./types";
 
 export function getTagline(settings: SiteData["settings"], locale: Locale) {
@@ -99,4 +100,31 @@ export function getProjectMedia(data: SiteData, project: Project) {
 
 export function projectStory(project: Project, locale: Locale) {
   return (locale === "de" ? project.storyDe : project.storyEn) ?? "";
+}
+
+/** Published photos from the portfolio category a service draws on. */
+export function serviceMedia(data: SiteData, service: Service) {
+  const cat = data.categories.find((c) => c.slug === service.category);
+  if (!cat) return [];
+  const projectIds = new Set(
+    getPublishedProjects(data)
+      .filter((p) => p.categoryIds.includes(cat.id))
+      .map((p) => p.id),
+  );
+  return data.media
+    .filter((m) => m.published && m.projectId && projectIds.has(m.projectId))
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+}
+
+/** One cover per service; services sharing a category get different photos where possible. */
+export function serviceCovers(data: SiteData): Record<string, MediaItem | undefined> {
+  const used: Record<string, number> = {};
+  return Object.fromEntries(
+    SERVICES.map((s) => {
+      const pool = serviceMedia(data, s);
+      const i = used[s.category] ?? 0;
+      used[s.category] = i + 1;
+      return [s.slug, pool.length ? pool[i % pool.length] : undefined];
+    }),
+  );
 }

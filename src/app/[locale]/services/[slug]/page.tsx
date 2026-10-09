@@ -10,7 +10,7 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/seo/StudioJsonLd";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { whatsappUrl } from "@/lib/contact";
-import { getPublishedProjects, mediaAlt } from "@/lib/data/selectors";
+import { mediaAlt, serviceCovers, serviceMedia } from "@/lib/data/selectors";
 import { readSiteData } from "@/lib/data/store";
 import { BERLIN_AREAS, SERVICES, getService } from "@/lib/services";
 import { pageMetadata, siteUrl } from "@/lib/site";
@@ -62,11 +62,12 @@ export default async function ServicePage({ params }: { params: Params }) {
   const url = `${siteUrl}/${loc}/services/${svc.slug}`;
   const waText = t("waText", { studio: settings.studioName, service: name });
 
-  const cat = data.categories.find((c) => c.slug === svc.category);
-  const photos = getPublishedProjects(data)
-    .filter((p) => cat && p.categoryIds.includes(cat.id))
-    .flatMap((p) => data.media.filter((m) => m.projectId === p.id && m.published))
-    .slice(0, 6);
+  const covers = serviceCovers(data);
+  const cover = covers[svc.slug];
+  // Cover leads the page; the rest show what the session looks like.
+  const photos = serviceMedia(data, svc)
+    .filter((m) => m.id !== cover?.id)
+    .slice(0, 7);
   const related = SERVICES.filter((s) => s.group === svc.group && s.slug !== svc.slug).slice(0, 3);
   const eventType = EVENT_TYPE[svc.category] ?? "other";
 
@@ -107,8 +108,8 @@ export default async function ServicePage({ params }: { params: Params }) {
         ])}
       />
 
-      <section className="mx-auto max-w-7xl px-5 pb-8 pt-24 md:px-8 md:pt-36">
-        <Reveal>
+      <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-8 pt-24 md:grid-cols-12 md:items-end md:gap-10 md:px-8 md:pt-36">
+        <Reveal className="md:col-span-7">
           <nav aria-label="Breadcrumb" className="text-[0.68rem] uppercase tracking-[0.22em] text-muted">
             <Link href="/" className="hover:text-ink">{t("home")}</Link>
             <span className="mx-2">/</span>
@@ -116,7 +117,7 @@ export default async function ServicePage({ params }: { params: Params }) {
             <span className="mx-2">/</span>
             <span className="text-ink">{name}</span>
           </nav>
-          <h1 className="mt-6 max-w-4xl font-[family-name:var(--font-syne)] text-[clamp(2.2rem,6vw,4.5rem)] font-medium leading-[1.04] tracking-[-0.03em]">
+          <h1 className="mt-6 max-w-4xl font-[family-name:var(--font-syne)] text-[clamp(2.2rem,5.4vw,4.25rem)] font-medium leading-[1.04] tracking-[-0.03em]">
             {title}
           </h1>
           <p className="mt-6 max-w-2xl font-[family-name:var(--font-instrument)] text-xl italic leading-snug text-ink-soft md:text-2xl">
@@ -138,6 +139,20 @@ export default async function ServicePage({ params }: { params: Params }) {
             </Link>
           </div>
         </Reveal>
+        {cover ? (
+          <ImageReveal className="md:col-span-5">
+            <div className="relative aspect-[4/3] bg-line md:aspect-[4/5]">
+              <Image
+                src={cover.url}
+                alt={`${mediaAlt(cover, loc)} – ${title}`}
+                fill
+                priority
+                sizes="(max-width:768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+          </ImageReveal>
+        ) : null}
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-8 md:grid-cols-12 md:px-8">
@@ -171,7 +186,13 @@ export default async function ServicePage({ params }: { params: Params }) {
 
       {photos.length ? (
         <section className="mx-auto max-w-7xl px-5 py-10 md:px-8">
-          <Reveal className="mb-4 md:mb-6">
+          <Reveal className="mb-5 md:mb-8">
+            <p className="text-[0.7rem] uppercase tracking-[0.24em] text-muted">{t("expectEyebrow")}</p>
+            <h2 className="mt-2 font-[family-name:var(--font-syne)] text-2xl font-medium tracking-tight md:text-4xl">
+              {t("expectTitle", { service: name })}
+            </h2>
+          </Reveal>
+          <Reveal className="mb-3 md:mb-4">
             <EditCompare src={photos[0].url} alt={`${mediaAlt(photos[0], loc)} – ${title}`} />
           </Reveal>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
@@ -203,6 +224,7 @@ export default async function ServicePage({ params }: { params: Params }) {
                 href={`/services/${s.slug}`}
                 name={de ? s.nameDe : s.nameEn}
                 short={de ? s.shortDe : s.shortEn}
+                image={covers[s.slug] ? { src: covers[s.slug]!.url, alt: `${mediaAlt(covers[s.slug]!, loc)} – ${de ? s.nameDe : s.nameEn}` } : undefined}
               />
             ))}
           </div>

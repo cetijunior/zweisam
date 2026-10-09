@@ -5,6 +5,7 @@ import { ShootFinder } from "@/components/features/ShootFinder";
 import { AreasBlock, ServiceCard, ServiceCta } from "@/components/services/ServiceBits";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/StudioJsonLd";
 import type { AppLocale } from "@/i18n/routing";
+import { mediaAlt, serviceCovers } from "@/lib/data/selectors";
 import { readSiteData } from "@/lib/data/store";
 import { SERVICE_GROUPS, SERVICES } from "@/lib/services";
 import { pageMetadata, siteUrl } from "@/lib/site";
@@ -31,7 +32,9 @@ export default async function ServicesPage({ params }: { params: Params }) {
   setRequestLocale(locale);
   const loc = locale as AppLocale;
   const t = await getTranslations("services");
-  const { settings } = await readSiteData();
+  const data = await readSiteData();
+  const { settings } = data;
+  const covers = serviceCovers(data);
   const groups = Object.keys(SERVICE_GROUPS) as (keyof typeof SERVICE_GROUPS)[];
 
   return (
@@ -80,6 +83,7 @@ export default async function ServicesPage({ params }: { params: Params }) {
                 href={`/services/${s.slug}`}
                 name={loc === "de" ? s.nameDe : s.nameEn}
                 short={loc === "de" ? s.shortDe : s.shortEn}
+                image={covers[s.slug] ? { src: covers[s.slug]!.url, alt: `${mediaAlt(covers[s.slug]!, loc)} – ${loc === "de" ? s.nameDe : s.nameEn}` } : undefined}
               />
             ))}
           </div>

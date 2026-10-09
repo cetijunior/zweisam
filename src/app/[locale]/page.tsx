@@ -19,6 +19,8 @@ import {
   getHeroImage,
   getPhotographersLine,
   getPublishedProjects,
+  mediaAlt,
+  serviceCovers,
 } from "@/lib/data/selectors";
 import type { AppLocale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/site";
@@ -74,6 +76,11 @@ export default async function HomePage({
   const processImages = ["media-1", "media-21", "media-10", "media-4", "media-5", "media-22"]
     .map((id) => data.media.find((m) => m.id === id)?.url)
     .filter((u): u is string => Boolean(u));
+  const serviceImages = Object.fromEntries(
+    Object.entries(serviceCovers(data))
+      .filter(([, m]) => m)
+      .map(([slug, m]) => [slug, { src: m!.url, alt: mediaAlt(m!, loc) }]),
+  );
   const craftImage =
     data.media.find((m) => m.id === "media-7") ?? data.media[1] ?? hero;
 
@@ -85,7 +92,7 @@ export default async function HomePage({
       <Marquee />
       <WorkFragments data={data} />
       <CategoryChapters data={data} categories={data.categories} />
-      <Services />
+      <Services images={serviceImages} />
       <ShootFinder />
       <AboutTeaser
         title={tAbout("title")}

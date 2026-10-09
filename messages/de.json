@@ -181,7 +181,9 @@
     "home": "Start",
     "work": "Unsere Arbeiten ansehen",
     "photographer": "Fotograf in Berlin",
-    "waText": "Hallo {studio}! Ich interessiere mich für: {service}."
+    "waText": "Hallo {studio}! Ich interessiere mich für: {service}.",
+    "expectEyebrow": "Was euch erwartet",
+    "expectTitle": "{service}: so sieht es bei uns aus"
   },
   "process": {
     "eyebrow": "So läuft’s",

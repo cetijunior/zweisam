@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/primitives";
 import { whatsappUrl } from "@/lib/contact";
@@ -79,20 +80,37 @@ export function ServiceCard({
   href,
   name,
   short,
+  image,
 }: {
   href: string;
   name: string;
   short: string;
+  image?: { src: string; alt: string };
 }) {
   return (
     <Link
       href={href}
-      className="group flex h-full items-center justify-between gap-4 border border-line bg-paper px-5 py-4 transition-colors duration-500 hover:bg-paper-elevated sm:flex-col sm:items-start sm:justify-start sm:p-6"
+      className="group flex h-full items-center gap-4 border border-line bg-paper p-3 pr-5 transition-colors duration-500 hover:bg-paper-elevated sm:flex-col sm:items-stretch sm:gap-0 sm:p-0"
     >
-      <h3 className="font-[family-name:var(--font-syne)] text-base font-medium tracking-tight sm:text-lg">{name}</h3>
-      <p className="mt-2 hidden text-sm leading-relaxed text-ink-soft sm:block">{short}</p>
-      <span aria-hidden className="text-ink transition-transform duration-500 group-hover:translate-x-1 sm:mt-auto sm:pt-6">
-        →
+      {image ? (
+        <span className="relative block h-16 w-16 shrink-0 overflow-hidden bg-line sm:aspect-[4/3] sm:h-auto sm:w-full">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(max-width:640px) 64px, (max-width:1024px) 50vw, 33vw"
+            className="object-cover transition duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+          />
+        </span>
+      ) : null}
+      <span className="flex flex-1 items-center justify-between gap-4 sm:flex-col sm:items-start sm:justify-start sm:p-6">
+        <span className="min-w-0">
+          <h3 className="font-[family-name:var(--font-syne)] text-base font-medium tracking-tight sm:text-lg">{name}</h3>
+          <p className="mt-1 line-clamp-1 text-[0.8rem] text-ink-soft sm:mt-2 sm:line-clamp-none sm:text-sm sm:leading-relaxed">{short}</p>
+        </span>
+        <span aria-hidden className="text-ink transition-transform duration-500 group-hover:translate-x-1 sm:mt-auto sm:pt-6">
+          →
+        </span>
       </span>
     </Link>
   );

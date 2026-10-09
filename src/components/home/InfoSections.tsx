@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { DrawLine, Reveal, ScrollWords } from "@/components/motion/primitives";
@@ -69,7 +70,7 @@ function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
   );
 }
 
-export function Services() {
+export function Services({ images = {} }: { images?: Record<string, { src: string; alt: string }> }) {
   const t = useTranslations("services");
   return (
     <section className="pb-12 md:pb-20">
@@ -81,6 +82,17 @@ export function Services() {
                 href={`/services/${slug}`}
                 className="group relative flex h-full flex-col p-6 transition-colors duration-500 hover:bg-paper-elevated md:p-8"
               >
+                {images[slug] ? (
+                  <span className="relative -mx-6 -mt-6 mb-6 block aspect-[4/3] overflow-hidden bg-line md:-mx-8 md:-mt-8 md:mb-8">
+                    <Image
+                      src={images[slug].src}
+                      alt={images[slug].alt}
+                      fill
+                      sizes="(max-width:640px) 80vw, (max-width:1024px) 50vw, 25vw"
+                      className="object-cover transition duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                    />
+                  </span>
+                ) : null}
                 <p className="text-[0.62rem] uppercase tracking-[0.24em] text-muted tabular-nums">
                   {String(i + 1).padStart(2, "0")}
                 </p>
